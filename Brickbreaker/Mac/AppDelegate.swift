@@ -55,10 +55,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     //high scores
     @IBOutlet weak var pathToFile: NSPathControl!
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         endlessModeEnabled = false
         window.delegate = self
-        timeLimit.enabled = false
+        timeLimit.isEnabled = false
         newGame(NSNull())
     }
 
@@ -67,36 +67,36 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         endlessModeEnabled = false
     }
 
-    func windowWillClose(notification: NSNotification) {
+    func windowWillClose(_ notification: Notification) {
         if quitOnClose.state == NSOnState {
-            NSApplication.sharedApplication().terminate(self)
+            NSApplication.shared().terminate(self)
         }
     }
 
-    @IBAction func newGame(sender: AnyObject) {
+    @IBAction func newGame(_ sender: AnyObject) {
         //
     }
 
-    @IBAction func showHelp(sender: AnyObject) {
+    @IBAction func showHelp(_ sender: AnyObject) {
         helpWindow.setIsVisible(true)
     }
 
-    @IBAction func showSettings(sender: AnyObject) {
+    @IBAction func showSettings(_ sender: AnyObject) {
         settingsWindow.setIsVisible(true)
     }
 
-    @IBAction func toggleEndless(sender: AnyObject) {
+    @IBAction func toggleEndless(_ sender: AnyObject) {
         endlessModeEnabled = (sender.state == NSOnState)
-        timeLimit.enabled = !endlessModeEnabled
+        timeLimit.isEnabled = !endlessModeEnabled
     }
 
-    @IBAction func chooseMusic(sender: AnyObject) {
+    @IBAction func chooseMusic(_ sender: AnyObject) {
         let panel = NSOpenPanel()
         panel.allowedFileTypes = ["aiff","mp3","m4a","wav"]
         panel.allowsMultipleSelection = false
         if panel.runModal() == NSFileHandlingPanelOKButton {
-            pathToMusic.URL = panel.URL!
-            music = NSSound(contentsOfURL: panel.URL!, byReference: true)!
+            pathToMusic.url = panel.url!
+            music = NSSound(contentsOf: panel.url!, byReference: true)!
             music.loops = (loopMusic.state == NSOnState)
         }
     }
