@@ -77,6 +77,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //
     }
 
+	@IBAction func saveScore(_ sender: Any) {
+	}
+	
     @IBAction func showHelp(_ sender: AnyObject) {
         helpWindow.setIsVisible(true)
     }
