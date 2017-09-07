@@ -585,10 +585,10 @@
             </objects>
             <point key="canvasLocation" x="1287" y="-701"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings Controller-->
         <scene sceneID="Xe2-4H-vBW">
             <objects>
-                <viewController id="2NS-mk-hye" sceneMemberID="viewController">
+                <viewController id="2NS-mk-hye" customClass="SettingsController" customModule="BrickBreaker_Mac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="wxE-yu-NNT">
                         <rect key="frame" x="0.0" y="0.0" width="522" height="597"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -643,6 +643,9 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="toggleEndless:" target="2NS-mk-hye" id="mKv-nT-1XT"/>
+                                            </connections>
                                         </button>
                                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f0i-qX-qtJ">
                                             <rect key="frame" x="16" y="93" width="234" height="18"/>
@@ -729,6 +732,9 @@
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="chooseMusic:" target="2NS-mk-hye" id="smQ-fo-sYt"/>
+                                            </connections>
                                         </button>
                                         <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eB4-DN-onf">
                                             <rect key="frame" x="18" y="50" width="445" height="22"/>
@@ -754,6 +760,9 @@
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="musicButton:" target="2NS-mk-hye" id="okI-CV-dON"/>
+                                            </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hWH-4K-jLW">
                                             <rect key="frame" x="304" y="7" width="84" height="32"/>
@@ -762,6 +771,9 @@
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="musicButton:" target="2NS-mk-hye" id="iiZ-IG-kek"/>
+                                            </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h3g-Ng-GmJ">
                                             <rect key="frame" x="384" y="7" width="85" height="32"/>
@@ -770,6 +782,9 @@
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="musicButton:" target="2NS-mk-hye" id="etU-lW-Cgd"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
@@ -947,6 +962,30 @@
                             </box>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="backgroundStyle" destination="K3I-DH-IGU" id="ms4-Iw-imy"/>
+                        <outlet property="bgColor" destination="zKW-k3-YXD" id="4Vd-sp-ihM"/>
+                        <outlet property="bgImage" destination="fFh-Eq-rdv" id="0Qq-OP-hDu"/>
+                        <outlet property="clearings" destination="0R0-DK-18a" id="zkH-o2-9GZ"/>
+                        <outlet property="colorBGMode" destination="6Cs-ON-tTc" id="PNn-0f-bLh"/>
+                        <outlet property="colorChangeTime" destination="Azo-j0-JY2" id="gsy-gK-Fhe"/>
+                        <outlet property="enableArcadeMode" destination="NMP-TI-iSe" id="Gpb-li-oNk"/>
+                        <outlet property="enableClearingsRegen" destination="f0i-qX-qtJ" id="BsJ-MF-xTY"/>
+                        <outlet property="enableRandomColorChange" destination="YVD-FL-17c" id="OqA-ip-9Qp"/>
+                        <outlet property="enableTimeRegen" destination="CDQ-OJ-HvA" id="Goq-Q4-Wbx"/>
+                        <outlet property="imageBGMode" destination="MSO-nq-cIr" id="FN4-tx-fte"/>
+                        <outlet property="loopMusic" destination="fKx-IX-cdO" id="5Th-ad-uCp"/>
+                        <outlet property="pathToFile" destination="HSL-9I-O1G" id="5ml-EV-gQU"/>
+                        <outlet property="pathToMusic" destination="eB4-DN-onf" id="F93-d9-imz"/>
+                        <outlet property="quitOnClose" destination="yI6-mo-TE3" id="cDB-Sg-fTT"/>
+                        <outlet property="tileColor1" destination="uCU-PZ-eZb" id="fpK-ne-6Ae"/>
+                        <outlet property="tileColor2" destination="qkd-FN-JzQ" id="BH8-E7-DZr"/>
+                        <outlet property="tileColor3" destination="F6K-sJ-Kav" id="NaB-Am-yY6"/>
+                        <outlet property="tileColor4" destination="pkW-AS-PLQ" id="znd-d7-8op"/>
+                        <outlet property="tileShapeSelection" destination="Nhl-Y3-JUU" id="7rc-0s-nui"/>
+                        <outlet property="time" destination="Tzv-pT-dGO" id="Xg3-8o-j5f"/>
+                        <outlet property="timeLimit" destination="9oL-FD-tbN" id="EeY-wq-eHe"/>
+                    </connections>
                 </viewController>
                 <customObject id="t6d-sc-Meg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
