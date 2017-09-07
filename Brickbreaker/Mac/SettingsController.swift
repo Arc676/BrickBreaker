@@ -77,7 +77,21 @@ class SettingsController: NSViewController {
 		}
 	}
 
+	func playMusic() {
+		if music?.play() ?? false {
+			music?.resume()
+		}
+	}
+
 	@IBAction func musicButton(_ sender: NSButton) {
+		if sender.title == "Play" {
+			playMusic()
+		} else if sender.title == "Pause" {
+			music?.pause()
+		} else {
+			music?.currentTime = 0
+			playMusic()
+		}
 	}
 
 }
