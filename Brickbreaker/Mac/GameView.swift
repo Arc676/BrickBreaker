@@ -183,7 +183,7 @@ class GameView: NSView {
             window?.title = "BrickBreaker Score: \(score) Selection: 0"
         } else {
             hasSelection = true
-            window?.title = "BrickBreaker Score: \(score) Selection: \(pow(Float(points.count - 1), 1)))"
+            window?.title = "BrickBreaker Score: \(score) Selection: \(pow(Float(points.count - 1), 4))"
         }
 
         needsDisplay = true
@@ -284,7 +284,7 @@ class GameView: NSView {
         points.removeAll()
         for _ in 0...(high + added - low + 1) {
             for x in left...right {
-                for y in max(0, low)...HEIGHT {
+                for y in max(1, low)..<HEIGHT {
                     if bricks[x][y] == .n_A {
                         continue
                     }
