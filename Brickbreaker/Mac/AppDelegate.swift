@@ -25,11 +25,12 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+		NSApp.mainWindow?.contentView?.becomeFirstResponder()
         newGame(NSNull())
     }
 
     @IBAction func newGame(_ sender: AnyObject) {
-        //
+		(NSApp.mainWindow?.contentView as! GameView).startGame()
     }
 
 	@IBAction func saveScore(_ sender: Any) {

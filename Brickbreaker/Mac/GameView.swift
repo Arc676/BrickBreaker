@@ -36,7 +36,7 @@ class GameView: NSView {
     var timeRegen, clearingsRegen, randomColorChange: Bool
     var score: UInt
     var clearings, clearingsLimit, regenTime, randomColorChangeTime, consecutive5s: Int
-    var timeLimit: Float
+    var timeLimit: Int
     var shape: TileShape
 
     var bricks: [[ColorIndex]]
@@ -64,7 +64,7 @@ class GameView: NSView {
         timeLimit = 0
 
         points = []
-        colors = []
+        colors = [NSColor.red, NSColor.green, NSColor.blue, NSColor.yellow]
 
         popUpText = ""
 
@@ -167,7 +167,7 @@ class GameView: NSView {
             return
         }
 
-        hasSelection = false;
+        hasSelection = false
         points.removeAll()
         let x = Int(theEvent.locationInWindow.x / 20)
         let y = Int(theEvent.locationInWindow.y / 20)
@@ -177,7 +177,7 @@ class GameView: NSView {
             return
         }
 
-        //findadjacentto
+        findAdjacentTo(x, y, bricks[x][y])
         if points.count == 1 {
             points.removeAll()
             window?.title = "BrickBreaker Score: \(score) Selection: 0"
@@ -189,7 +189,7 @@ class GameView: NSView {
         needsDisplay = true
     }
 
-    override func keyDown(with theEvent: NSEvent) {
+    override func keyUp(with theEvent: NSEvent) {
         if points.count == 0 {
             return
         }
@@ -312,7 +312,7 @@ class GameView: NSView {
             clearings += 1
             if clearings >= clearingsLimit {
                 clearings = 0
-                //generate tiles
+                addTiles()
             }
         }
 
@@ -338,5 +338,128 @@ class GameView: NSView {
         popUpText = ""
         needsDisplay = true
     }
-    
+
+	func findAdjacentTo(_ x: Int, _ y: Int, _ color: ColorIndex) {
+		points.append("\(x) \(y)")
+		if y < HEIGHT - 1 {
+			if bricks[x][y + 1] == color &&
+				!points.contains("\(x) \(y + 1)") {
+				findAdjacentTo(x, y + 1, color)
+			}
+		}
+		if y > 0 {
+			if bricks[x][y - 1] == color &&
+				!points.contains("\(x) \(y - 1)") {
+				findAdjacentTo(x, y - 1, color)
+			}
+		}
+		if x < WIDTH - 1 {
+			if bricks[x + 1][y] == color &&
+				!points.contains("\(x + 1) \(y)") {
+				findAdjacentTo(x + 1, y, color)
+			}
+		}
+		if x > 0 {
+			if bricks[x - 1][y] == color &&
+				!points.contains("\(x - 1) \(y)") {
+				findAdjacentTo(x - 1, y, color)
+			}
+		}
+	}
+
+	func generateTiles(_ mode: GenerationMode) {
+		for x in 0..<WIDTH {
+			for y in 0..<HEIGHT {
+				let val = ColorIndex(rawValue: Int(arc4random_uniform(4)))!
+				if (mode == .new_GAME) ||
+					(mode == .regen_TILES && bricks[x][y] == .n_A) ||
+					(mode == .shuffle_TILES && bricks[x][y] != .n_A) {
+					bricks[x][y] = val
+				}
+			}
+		}
+		hasSelection = false
+		points.removeAll()
+		needsDisplay = true
+	}
+
+	@objc func addTiles() {
+		generateTiles(.regen_TILES)
+	}
+
+	@objc func shuffleTiles() {
+		generateTiles(.shuffle_TILES)
+	}
+
+	func startGame() {
+		if clearingsLimit <= 0 {
+			clearingsLimit = defaultRegenClearings
+		}
+		if timeLimit <= 0 {
+			timeLimit = defaultTimeLimit
+		}
+		if regenTime <= 0 {
+			regenTime = defaultRegenTime
+		}
+		if randomColorChangeTime <= 0 {
+			randomColorChangeTime = defaultColorChangeTime
+		}
+		if timeRegen {
+			regenTimer = Timer.scheduledTimer(
+				timeInterval: TimeInterval(regenTime),
+				target: self,
+				selector: #selector(addTiles),
+				userInfo: nil,
+				repeats: true)
+		} else {
+			if regenTimer != nil {
+				regenTimer.invalidate()
+				regenTimer = nil
+			}
+		}
+		if isTimed {
+			gameTimer = Timer.scheduledTimer(
+				timeInterval: TimeInterval(self.timeLimit * 60),
+				target: self,
+				selector: #selector(endGame),
+				userInfo: nil,
+				repeats: false)
+		} else {
+			if gameTimer != nil {
+				gameTimer.invalidate()
+				gameTimer = nil
+			}
+		}
+		if randomColorChange {
+			colorChangeTimer = Timer.scheduledTimer(
+				timeInterval: TimeInterval(randomColorChangeTime),
+				target: self,
+				selector: #selector(shuffleTiles),
+				userInfo: nil,
+				repeats: true)
+		} else {
+			if colorChangeTimer != nil {
+				colorChangeTimer.invalidate()
+				colorChangeTimer = nil
+			}
+		}
+		generateTiles(.new_GAME)
+		powerups = [[PowerUp]](repeating: [PowerUp](repeating: .no_POWERUP, count: HEIGHT), count: WIDTH)
+		consecutive5s = 0
+		if arcadeModeEnabled {
+				for _ in 0..<15  {
+					if arc4random_uniform(100) < 60 {
+						powerups[Int(arc4random_uniform(UInt32(WIDTH)))][Int(arc4random_uniform(UInt32(HEIGHT)))] =
+							PowerUp(rawValue: Int(arc4random_uniform(7)) + 1)!
+					}
+				}
+		}
+		points.removeAll()
+		score = 0
+		gameOver = false
+		hasSelection = false
+//		[self.window setTitle:@"Brickbreaker Score:0 Selection:0"]
+		needsDisplay = true
+	}
+	
 }
