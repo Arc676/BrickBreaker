@@ -83,7 +83,7 @@
 		714AC3621C2E449D000D65E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../Brickbreaker/iOS/ViewController.swift; sourceTree = "<group>"; };
 		714AC3651C2E449D000D65E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		714AC36A1C2E449D000D65E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		714AC36C1C2E449D000D65E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Brickbreaker/Info.plist; sourceTree = "<group>"; };
+		714AC36C1C2E449D000D65E6 /* iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iOS; path = ../Brickbreaker/iOS; sourceTree = "<group>"; };
 		714AC3711C2E449D000D65E6 /* BrickBreakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrickBreakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		714AC3751C2E449D000D65E6 /* BrickBreakerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickBreakerTests.swift; sourceTree = "<group>"; };
 		714AC3771C2E449D000D65E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 				71D56A321C2E538F00D7FAA3 /* GameView.swift */,
 				714AC3641C2E449D000D65E6 /* Main.storyboard */,
 				714AC3691C2E449D000D65E6 /* LaunchScreen.storyboard */,
-				714AC36C1C2E449D000D65E6 /* Info.plist */,
+				714AC36C1C2E449D000D65E6 /* iOS */,
 			);
 			name = "BrickBreaker iOS";
 			path = BrickBreaker;
