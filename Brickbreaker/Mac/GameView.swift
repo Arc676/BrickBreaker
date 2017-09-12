@@ -29,7 +29,7 @@ class GameView: NSView {
     var regenTimer, gameTimer, colorChangeTimer, popUpTextTimer: Timer!
     var colors: [NSColor]
     var bgImage, bomb, plus50, plus200, plus2k, plus5k, clearRow, clearColumn: NSImage!
-    var bgColor: NSColor!
+    var bgColor: NSColor! = NSColor.black
     var popUpText: String
 
     var hasSelection, gameOver, isTimed, isImageBG, arcadeModeEnabled, popUpTextPresent: Bool
@@ -93,8 +93,8 @@ class GameView: NSView {
             NSRectFill(rect)
         }
 
-        for x in 0...WIDTH {
-            for y in 0...HEIGHT {
+        for x in 0..<WIDTH {
+            for y in 0..<HEIGHT {
                 if bricks[x][y] == .n_A {
                     continue
                 }
