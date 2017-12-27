@@ -177,8 +177,9 @@ class GameView: NSView {
 		let x = Int(x / 20)
 		let y = Int(y / 20)
 
-		if bricks[x][y] == .n_A {
+		if x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT || bricks[x][y] == .n_A {
 			needsDisplay = true
+			window?.title = "BrickBreaker Score: \(score) Selection: 0"
 			return
 		}
 
@@ -236,20 +237,27 @@ class GameView: NSView {
 
 			bricks[xcoord][ycoord] = .n_A
 			if arcadeModeEnabled {
+				var cleared = 0
 				switch powerups[xcoord][ycoord] {
 				case .bomb:
-					var cleared = 0
 					for x in (xcoord - 2)...(xcoord + 2) {
+						if x < 0 || x >= WIDTH {
+							continue
+						}
 						for y in (ycoord - 2)...(ycoord + 2) {
+							if y < 0 || y >= HEIGHT {
+								continue
+							}
 							if bricks[x][y] != .n_A {
 								bricks[x][y] = .n_A
 								cleared += 1
 							}
 						}
 					}
-					score += UInt(pow(Double(cleared), 4))
 					added += 4
 					low = max(0, low - 2)
+					left = max(0, left - 2)
+					right = min(WIDTH - 1, right + 2)
 				case .plus_50:
 					score += 50
 				case .plus_200:
@@ -259,29 +267,28 @@ class GameView: NSView {
 				case .plus_5K:
 					score += 5000
 				case .clear_ROW:
-					var cleared = 0
-					for x in 0...WIDTH {
+					for x in 0..<WIDTH {
 						if bricks[x][ycoord] != .n_A {
 							bricks[x][ycoord] = .n_A
 							cleared += 1
 						}
 					}
-					score += UInt(pow(Double(cleared), 4))
 					added += 1
 					low = max(0, low - 1)
+					left = 0
+					right = WIDTH - 1
 				case .clear_COLUMN:
-					var cleared = 0
-					for y in 0...HEIGHT {
+					for y in 0..<HEIGHT {
 						if bricks[xcoord][y] != .n_A {
 							bricks[xcoord][y] = .n_A
 							cleared += 1
 						}
 					}
-					score += UInt(pow(Double(cleared), 4))
 					low = 0
 				default:
 					break
 				}
+				score += UInt(pow(Double(cleared), 4))
 				powerups[xcoord][ycoord] = .no_POWERUP
 			}
 		}
