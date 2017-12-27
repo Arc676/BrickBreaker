@@ -429,6 +429,13 @@ class GameView: NSView {
 
 			shape = settings["TileShape"] as! TileShape
 			arcadeModeEnabled = settings["ArcadeModeEnabled"] as! Bool
+
+			isImageBG = settings["ImageBGEnabled"] as! Bool
+			if isImageBG {
+				bgImage = settings["BGImage"] as! NSImage
+			} else {
+				bgColor = settings["BGColor"] as! NSColor
+			}
 		}
 
 		if clearingsLimit <= 0 {

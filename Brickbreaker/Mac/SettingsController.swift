@@ -103,11 +103,6 @@ class SettingsController: NSViewController {
 
 	func getCurrentSettings() -> [String : Any] {
 		//unimplemened settings in getter:
-//		@IBOutlet weak var backgroundStyle: NSMatrix!
-//		@IBOutlet weak var colorBGMode: NSButtonCell!
-//		@IBOutlet weak var imageBGMode: NSButtonCell!
-//		@IBOutlet weak var bgColor: NSColorWell!
-//		@IBOutlet weak var bgImage: NSImageView!
 //		//music settings
 //		@IBOutlet weak var pathToMusic: NSPathControl!
 //		@IBOutlet weak var loopMusic: NSButton!
@@ -130,7 +125,10 @@ class SettingsController: NSViewController {
 			"IsTimed" : !endlessModeEnabled,
 			"TimeLimit" : timeLimit.integerValue,
 			"TileShape" : TileShape(rawValue: tileShapeSelection.indexOfSelectedItem) ?? .circle,
-			"ArcadeModeEnabled" : enableArcadeMode.state == NSControl.StateValue.on
+			"ArcadeModeEnabled" : enableArcadeMode.state == NSControl.StateValue.on,
+			"ImageBGEnabled" : backgroundStyle.selectedCell() == imageBGMode,
+			"BGImage" : bgImage.image ?? "",
+			"BGColor" : bgColor.color
 		]
 	}
 
