@@ -70,7 +70,7 @@ class SettingsController: NSViewController {
 		let panel = NSOpenPanel()
 		panel.allowedFileTypes = ["aiff","mp3","m4a","wav"]
 		panel.allowsMultipleSelection = false
-		if panel.runModal() == NSFileHandlingPanelOKButton {
+		if panel.runModal().rawValue == NSFileHandlingPanelOKButton {
 			pathToMusic.url = panel.url!
 			music = NSSound(contentsOf: panel.url!, byReference: true)
 			music!.loops = (loopMusic.state == NSOnState)

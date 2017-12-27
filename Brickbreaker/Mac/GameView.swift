@@ -70,13 +70,13 @@ class GameView: NSView {
 
         shape = .circle
 
-        bomb = NSImage(named: "bomb.png")
-        plus50 = NSImage(named: "plus50.png")
-        plus200 = NSImage(named: "plus200.png")
-        plus2k = NSImage(named: "plus2k.png")
-        plus5k = NSImage(named: "plus5k.png")
-        clearRow = NSImage(named: "clearRow.png")
-        clearColumn = NSImage(named: "clearColumn.png")
+        bomb = NSImage(named: NSImage.Name(rawValue: "bomb.png"))
+        plus50 = NSImage(named: NSImage.Name(rawValue: "plus50.png"))
+        plus200 = NSImage(named: NSImage.Name(rawValue: "plus200.png"))
+        plus2k = NSImage(named: NSImage.Name(rawValue: "plus2k.png"))
+        plus5k = NSImage(named: NSImage.Name(rawValue: "plus5k.png"))
+        clearRow = NSImage(named: NSImage.Name(rawValue: "clearRow.png"))
+        clearColumn = NSImage(named: NSImage.Name(rawValue: "clearColumn.png"))
 
         bricks = [[ColorIndex]](repeating: [ColorIndex](repeating: .n_A, count: HEIGHT), count: WIDTH)
         powerups = [[PowerUp]](repeating: [PowerUp](repeating: .no_POWERUP, count: HEIGHT), count: WIDTH)
@@ -90,7 +90,7 @@ class GameView: NSView {
             bgImage.draw(at: NSZeroPoint, from: NSZeroRect, operation: .sourceOver, fraction: 1)
         } else {
             bgColor.set()
-            NSRectFill(rect)
+            rect.fill()
         }
 
         for x in 0..<WIDTH {
@@ -107,7 +107,7 @@ class GameView: NSView {
                     path.appendOval(in: NSMakeRect(xcoord, ycoord, 20, 20))
                     path.fill()
                 } else {
-                    NSRectFill(NSMakeRect(xcoord, ycoord, 20, 20))
+                    NSMakeRect(xcoord, ycoord, 20, 20).fill()
                 }
 
                 if arcadeModeEnabled && powerups[x][y] != .no_POWERUP {
@@ -136,24 +136,24 @@ class GameView: NSView {
                     for point in points {
                         NSColor.white.set()
                         let origin = NSPointFromString(point)
-                        NSFrameRect(NSMakeRect(origin.x * 20, origin.y * 20, 20, 20))
+                        NSMakeRect(origin.x * 20, origin.y * 20, 20, 20).frame()
                     }
                 }
 
                 NSColor.black.set()
                 let att: [String:AnyObject] = [
-                    NSFontAttributeName : NSFont(name: "Helvetica", size: 30)!,
-                    NSForegroundColorAttributeName : NSColor.white
+                    NSAttributedStringKey.font.rawValue : NSFont(name: "Helvetica", size: 30)!,
+                    NSAttributedStringKey.foregroundColor.rawValue : NSColor.white
                 ]
 
                 if popUpTextPresent {
                     let str = NSAttributedString(string: popUpText.substring(from: popUpText.characters.index(popUpText.startIndex, offsetBy: 1)), attributes: att)
-                    NSRectFill(NSMakeRect(0, 540 - str.size().height, 440, str.size().height + 10))
+                    NSMakeRect(0, 540 - str.size().height, 440, str.size().height + 10).fill()
                     str.draw(at: NSMakePoint(440/2 - str.size().width/2, 550 - str.size().height))
                 }
 
                 if gameOver {
-                    NSRectFill(NSMakeRect(0, 250, 440, 50))
+                    NSMakeRect(0, 250, 440, 50).fill()
                     let str = NSAttributedString(string: "Game Over", attributes: att)
                     str.draw(at: NSMakePoint(440/2 - str.size().width/2, 255))
                 }
@@ -328,12 +328,12 @@ class GameView: NSView {
         needsDisplay = true
     }
 
-    func endGame() {
+    @objc func endGame() {
         gameOver = true
         needsDisplay = true
     }
 
-    func hidePopUpText(_ timer: Timer) {
+    @objc func hidePopUpText(_ timer: Timer) {
         popUpTextPresent = false
         popUpText = ""
         needsDisplay = true
