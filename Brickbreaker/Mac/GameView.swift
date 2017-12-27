@@ -168,166 +168,173 @@ class GameView: NSView {
             needsDisplay = true
             return
         }
-
-        hasSelection = false
-        points.removeAll()
-        let x = Int(theEvent.locationInWindow.x / 20)
-        let y = Int(theEvent.locationInWindow.y / 20)
-
-        if bricks[x][y] == .n_A {
-            needsDisplay = true
-            return
-        }
-
-        findAdjacentTo(x, y, bricks[x][y])
-        if points.count == 1 {
-            points.removeAll()
-            window?.title = "BrickBreaker Score: \(score) Selection: 0"
-        } else {
-            hasSelection = true
-            window?.title = "BrickBreaker Score: \(score) Selection: \(pow(Float(points.count - 1), 4))"
-        }
-
-        needsDisplay = true
+		selectBricks(theEvent.locationInWindow.x, theEvent.locationInWindow.y)
     }
 
+	func selectBricks(_ x: CGFloat, _ y: CGFloat) {
+		hasSelection = false
+		points.removeAll()
+		let x = Int(x / 20)
+		let y = Int(y / 20)
+
+		if bricks[x][y] == .n_A {
+			needsDisplay = true
+			return
+		}
+
+		findAdjacentTo(x, y, bricks[x][y])
+		if points.count == 1 {
+			points.removeAll()
+			window?.title = "BrickBreaker Score: \(score) Selection: 0"
+		} else {
+			hasSelection = true
+			window?.title = "BrickBreaker Score: \(score) Selection: \(pow(Float(points.count - 1), 4))"
+		}
+
+		needsDisplay = true
+	}
+
+	func clearBricks() {
+		if points.count == 0 {
+			return
+		}
+
+		if points.count > 5 {
+			consecutive5s += 1
+		} else {
+			consecutive5s = 0
+		}
+
+		var shouldShowPopUp = false
+
+		if consecutive5s > 0 && consecutive5s % 5 == 0 {
+			popUpText += "\nCombo (\(consecutive5s))! +\(consecutive5s * 100)"
+			score += UInt(consecutive5s * 100)
+			shouldShowPopUp = true
+		}
+
+		score += UInt(pow(Double(points.count - 1), 4))
+
+		var low = HEIGHT, high = -1, left = WIDTH, right = -1, added = 0
+		for str in points {
+			let point = NSPointFromString(str)
+			let xcoord = Int(point.x), ycoord = Int(point.y)
+
+			if ycoord < low {
+				low = ycoord
+			}
+			if ycoord > high {
+				high = ycoord
+			}
+
+			if xcoord < left {
+				left = xcoord
+			}
+			if xcoord > right {
+				right = xcoord
+			}
+
+			bricks[xcoord][ycoord] = .n_A
+			if arcadeModeEnabled {
+				switch powerups[xcoord][ycoord] {
+				case .bomb:
+					var cleared = 0
+					for x in (xcoord - 2)...(xcoord + 2) {
+						for y in (ycoord - 2)...(ycoord + 2) {
+							if bricks[x][y] != .n_A {
+								bricks[x][y] = .n_A
+								cleared += 1
+							}
+						}
+					}
+					score += UInt(pow(Double(cleared), 4))
+					added += 4
+					low = max(0, low - 2)
+				case .plus_50:
+					score += 50
+				case .plus_200:
+					score += 200
+				case .plus_2K:
+					score += 2000
+				case .plus_5K:
+					score += 5000
+				case .clear_ROW:
+					var cleared = 0
+					for x in 0...WIDTH {
+						if bricks[x][ycoord] != .n_A {
+							bricks[x][ycoord] = .n_A
+							cleared += 1
+						}
+					}
+					score += UInt(pow(Double(cleared), 4))
+					added += 1
+					low = max(0, low - 1)
+				case .clear_COLUMN:
+					var cleared = 0
+					for y in 0...HEIGHT {
+						if bricks[xcoord][y] != .n_A {
+							bricks[xcoord][y] = .n_A
+							cleared += 1
+						}
+					}
+					score += UInt(pow(Double(cleared), 4))
+					low = 0
+				default:
+					break
+				}
+				powerups[xcoord][ycoord] = .no_POWERUP
+			}
+		}
+
+		points.removeAll()
+		for _ in 0...(high + added - low + 1) {
+			for x in left...right {
+				for y in max(1, low)..<HEIGHT {
+					if bricks[x][y] == .n_A {
+						continue
+					}
+					if bricks[x][y - 1] == .n_A {
+						bricks[x][y - 1] = bricks[x][y]
+						bricks[x][y] = .n_A
+						if arcadeModeEnabled && powerups[x][y] != .no_POWERUP {
+							powerups[x][y - 1] = powerups[x][y]
+							powerups[x][y] = .no_POWERUP
+						}
+					}
+				}
+			}
+		}
+
+		if arc4random_uniform(100) < 7 {
+			popUpText += "\nCritical! +500 pts"
+			score += 500
+			shouldShowPopUp = true
+		}
+
+		window?.title = "BrickBreaker Score: \(score) Selection: 0"
+
+		if clearingsRegen {
+			clearings += 1
+			if clearings >= clearingsLimit {
+				clearings = 0
+				addTiles()
+			}
+		}
+
+		if shouldShowPopUp {
+			popUpTextPresent = true
+			if (popUpTextTimer != nil) {
+				popUpTextTimer.invalidate()
+				popUpTextTimer = nil
+			}
+			popUpTextTimer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(GameView.hidePopUpText(_:)), userInfo: nil, repeats: false)
+		}
+
+		needsDisplay = true
+	}
+
     override func keyUp(with theEvent: NSEvent) {
-        if points.count == 0 {
-            return
-        }
-
-        if points.count > 5 {
-            consecutive5s += 1
-        } else {
-            consecutive5s = 0
-        }
-
-        var shouldShowPopUp = false
-
-        if consecutive5s > 0 && consecutive5s % 5 == 0 {
-            popUpText += "\nCombo (\(consecutive5s))! +\(consecutive5s * 100)"
-            score += UInt(consecutive5s * 100)
-            shouldShowPopUp = true
-        }
-
-        score += UInt(pow(Double(points.count - 1), 4))
-
-        var low = HEIGHT, high = -1, left = WIDTH, right = -1, added = 0
-        for str in points {
-            let point = NSPointFromString(str)
-            let xcoord = Int(point.x), ycoord = Int(point.y)
-
-            if ycoord < low {
-                low = ycoord
-            }
-            if ycoord > high {
-                high = ycoord
-            }
-
-            if xcoord < left {
-                left = xcoord
-            }
-            if xcoord > right {
-                right = xcoord
-            }
-
-            bricks[xcoord][ycoord] = .n_A
-            if arcadeModeEnabled {
-                switch powerups[xcoord][ycoord] {
-                case .bomb:
-                    var cleared = 0
-                    for x in (xcoord - 2)...(xcoord + 2) {
-                        for y in (ycoord - 2)...(ycoord + 2) {
-                            if bricks[x][y] != .n_A {
-                                bricks[x][y] = .n_A
-                                cleared += 1
-                            }
-                        }
-                    }
-                    score += UInt(pow(Double(cleared), 4))
-                    added += 4
-                    low = max(0, low - 2)
-                case .plus_50:
-                    score += 50
-                case .plus_200:
-                    score += 200
-                case .plus_2K:
-                    score += 2000
-                case .plus_5K:
-                    score += 5000
-                case .clear_ROW:
-                    var cleared = 0
-                    for x in 0...WIDTH {
-                        if bricks[x][ycoord] != .n_A {
-                            bricks[x][ycoord] = .n_A
-                            cleared += 1
-                        }
-                    }
-                    score += UInt(pow(Double(cleared), 4))
-                    added += 1
-                    low = max(0, low - 1)
-                case .clear_COLUMN:
-                    var cleared = 0
-                    for y in 0...HEIGHT {
-                        if bricks[xcoord][y] != .n_A {
-                            bricks[xcoord][y] = .n_A
-                            cleared += 1
-                        }
-                    }
-                    score += UInt(pow(Double(cleared), 4))
-                    low = 0
-                default:
-                    break
-                }
-                powerups[xcoord][ycoord] = .no_POWERUP
-            }
-        }
-
-        points.removeAll()
-        for _ in 0...(high + added - low + 1) {
-            for x in left...right {
-                for y in max(1, low)..<HEIGHT {
-                    if bricks[x][y] == .n_A {
-                        continue
-                    }
-                    if bricks[x][y - 1] == .n_A {
-                        bricks[x][y - 1] = bricks[x][y]
-                        bricks[x][y] = .n_A
-                        if arcadeModeEnabled && powerups[x][y] != .no_POWERUP {
-                            powerups[x][y - 1] = powerups[x][y]
-                            powerups[x][y] = .no_POWERUP
-                        }
-                    }
-                }
-            }
-        }
-
-        if arc4random_uniform(100) < 7 {
-            popUpText += "\nCritical! +500 pts"
-            score += 500
-            shouldShowPopUp = true
-        }
-
-        window?.title = "BrickBreaker Score: \(score) Selection: 0"
-
-        if clearingsRegen {
-            clearings += 1
-            if clearings >= clearingsLimit {
-                clearings = 0
-                addTiles()
-            }
-        }
-
-        if shouldShowPopUp {
-            popUpTextPresent = true
-            if (popUpTextTimer != nil) {
-                popUpTextTimer.invalidate()
-                popUpTextTimer = nil
-            }
-            popUpTextTimer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(GameView.hidePopUpText(_:)), userInfo: nil, repeats: false)
-        }
-
-        needsDisplay = true
+		clearBricks()
     }
 
     @objc func endGame() {
