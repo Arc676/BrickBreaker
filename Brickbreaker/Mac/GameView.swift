@@ -401,6 +401,29 @@ class GameView: NSView {
 	}
 
 	func startGame() {
+		if let settings = SettingsController.getSettings() {
+			colors = [
+				settings["Color1"] as! NSColor,
+				settings["Color2"] as! NSColor,
+				settings["Color3"] as! NSColor,
+				settings["Color4"] as! NSColor
+			]
+			timeRegen = settings["TimeRegenEnabled"] as! Bool
+			regenTime = settings["RegenTime"] as! Int
+
+			clearingsRegen = settings["ClearingsRegenEnabled"] as! Bool
+			clearingsLimit = settings["ClearingsCount"] as! Int
+
+			randomColorChange = settings["ColorChangeEnabled"] as! Bool
+			randomColorChangeTime = settings["ColorChangeTime"] as! Int
+
+			isTimed = settings["IsTimed"] as! Bool
+			timeLimit = settings["TimeLimit"] as! Int
+
+			shape = settings["TileShape"] as! TileShape
+			arcadeModeEnabled = settings["ArcadeModeEnabled"] as! Bool
+		}
+
 		if clearingsLimit <= 0 {
 			clearingsLimit = defaultRegenClearings
 		}
@@ -439,6 +462,11 @@ class GameView: NSView {
 				gameTimer = nil
 			}
 		}
+
+		if colorChangeTimer != nil {
+			colorChangeTimer.invalidate()
+			colorChangeTimer = nil
+		}
 		if randomColorChange {
 			colorChangeTimer = Timer.scheduledTimer(
 				timeInterval: TimeInterval(randomColorChangeTime),
@@ -446,11 +474,6 @@ class GameView: NSView {
 				selector: #selector(shuffleTiles),
 				userInfo: nil,
 				repeats: true)
-		} else {
-			if colorChangeTimer != nil {
-				colorChangeTimer.invalidate()
-				colorChangeTimer = nil
-			}
 		}
 		generateTiles(.new_GAME)
 		powerups = [[PowerUp]](repeating: [PowerUp](repeating: .no_POWERUP, count: HEIGHT), count: WIDTH)

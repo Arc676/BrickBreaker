@@ -66,7 +66,6 @@
                                         </menuItem>
                                         <menuItem title="Game Settings" keyEquivalent="," id="VvX-ig-DBt">
                                             <connections>
-                                                <action selector="showSettings:" target="Voe-Tx-rLC" id="pO6-mQ-e0j"/>
                                                 <segue destination="pY3-CD-hHs" kind="show" id="brp-sc-H9w"/>
                                             </connections>
                                         </menuItem>
@@ -350,7 +349,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BrickBreaker_Mac" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-395" y="-320"/>
+            <point key="canvasLocation" x="-448" y="-550"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="h4k-MQ-xH1">
@@ -392,7 +391,7 @@
                 </windowController>
                 <customObject id="Ugq-PZ-u0X" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="99" y="123"/>
+            <point key="canvasLocation" x="-107" y="162"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="IiJ-cc-M3d">

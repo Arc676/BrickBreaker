@@ -22,6 +22,8 @@
 import Cocoa
 
 class SettingsController: NSViewController {
+
+	static var instance: SettingsController?
 	
 	//game settings
 	//game modes and settings
@@ -61,6 +63,11 @@ class SettingsController: NSViewController {
 	//high scores
 	@IBOutlet weak var pathToFile: NSPathControl!
 
+	required init?(coder: NSCoder) {
+		super.init(coder: coder)
+		SettingsController.instance = self
+	}
+
 	@IBAction func toggleEndless(_ sender: AnyObject) {
 		endlessModeEnabled = (sender.state == NSControl.StateValue.on)
 		timeLimit.isEnabled = !endlessModeEnabled
@@ -92,6 +99,43 @@ class SettingsController: NSViewController {
 			music?.currentTime = 0
 			playMusic()
 		}
+	}
+
+	func getCurrentSettings() -> [String : Any] {
+		//unimplemened settings in getter:
+//		@IBOutlet weak var backgroundStyle: NSMatrix!
+//		@IBOutlet weak var colorBGMode: NSButtonCell!
+//		@IBOutlet weak var imageBGMode: NSButtonCell!
+//		@IBOutlet weak var bgColor: NSColorWell!
+//		@IBOutlet weak var bgImage: NSImageView!
+//		//music settings
+//		@IBOutlet weak var pathToMusic: NSPathControl!
+//		@IBOutlet weak var loopMusic: NSButton!
+//		var music: NSSound?
+//		//interface settings
+//		@IBOutlet weak var quitOnClose: NSButton!
+//		//high scores
+//		@IBOutlet weak var pathToFile: NSPathControl!
+		return [
+			"Color1" : tileColor1.color,
+			"Color2" : tileColor2.color,
+			"Color3" : tileColor3.color,
+			"Color4" : tileColor4.color,
+			"TimeRegenEnabled" : enableTimeRegen.state == NSControl.StateValue.on,
+			"RegenTime" : time.integerValue,
+			"ClearingsRegenEnabled" : enableClearingsRegen.state == NSControl.StateValue.on,
+			"ClearingsCount" : clearings.integerValue,
+			"ColorChangeEnabled" : enableRandomColorChange.state == NSControl.StateValue.on,
+			"ColorChangeTime" : colorChangeTime.integerValue,
+			"IsTimed" : !endlessModeEnabled,
+			"TimeLimit" : timeLimit.integerValue,
+			"TileShape" : TileShape(rawValue: tileShapeSelection.indexOfSelectedItem) ?? .circle,
+			"ArcadeModeEnabled" : enableArcadeMode.state == NSControl.StateValue.on
+		]
+	}
+
+	static func getSettings() -> [String : Any]? {
+		return instance?.getCurrentSettings()
 	}
 
 }
