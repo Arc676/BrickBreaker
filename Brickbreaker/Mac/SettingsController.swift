@@ -62,7 +62,7 @@ class SettingsController: NSViewController {
 	@IBOutlet weak var pathToFile: NSPathControl!
 
 	@IBAction func toggleEndless(_ sender: AnyObject) {
-		endlessModeEnabled = (sender.state == NSOnState)
+		endlessModeEnabled = (sender.state == NSControl.StateValue.on)
 		timeLimit.isEnabled = !endlessModeEnabled
 	}
 
@@ -73,7 +73,7 @@ class SettingsController: NSViewController {
 		if panel.runModal().rawValue == NSFileHandlingPanelOKButton {
 			pathToMusic.url = panel.url!
 			music = NSSound(contentsOf: panel.url!, byReference: true)
-			music!.loops = (loopMusic.state == NSOnState)
+			music!.loops = (loopMusic.state == NSControl.StateValue.on)
 		}
 	}
 

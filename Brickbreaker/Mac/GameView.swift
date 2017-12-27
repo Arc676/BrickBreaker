@@ -141,13 +141,15 @@ class GameView: NSView {
                 }
 
                 NSColor.black.set()
-                let att: [String:AnyObject] = [
-                    NSAttributedStringKey.font.rawValue : NSFont(name: "Helvetica", size: 30)!,
-                    NSAttributedStringKey.foregroundColor.rawValue : NSColor.white
+                let att: [NSAttributedStringKey : Any] = [
+                    NSAttributedStringKey.font : NSFont(name: "Helvetica", size: 30)!,
+                    NSAttributedStringKey.foregroundColor : NSColor.white
                 ]
 
                 if popUpTextPresent {
-                    let str = NSAttributedString(string: popUpText.substring(from: popUpText.characters.index(popUpText.startIndex, offsetBy: 1)), attributes: att)
+                    let str = NSAttributedString(string:
+						String(popUpText[popUpText.index(popUpText.startIndex, offsetBy: 1)...]),
+						attributes: att)
                     NSMakeRect(0, 540 - str.size().height, 440, str.size().height + 10).fill()
                     str.draw(at: NSMakePoint(440/2 - str.size().width/2, 550 - str.size().height))
                 }
