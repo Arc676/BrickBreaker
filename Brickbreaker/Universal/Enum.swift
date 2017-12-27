@@ -22,33 +22,33 @@
 import Foundation
 
 enum ColorIndex: Int{
-    case green
-    case red
-    case blue
-    case yellow
-    case n_A
+    case GREEN
+    case RED
+    case BLUE
+    case YELLOW
+    case N_A
 }
 
 enum PowerUp: Int{
-    case no_POWERUP
-    case bomb
-    case plus_50
-    case plus_200
-    case plus_2K
-    case plus_5K
-    case clear_ROW
-    case clear_COLUMN
+    case NO_POWERUP
+    case BOMB
+    case PLUS_50
+    case PLUS_200
+    case PLUS_2K
+    case PLUS_5K
+    case CLEAR_ROW
+    case CLEAR_COLUMN
 }
 
 enum TileShape: Int{
-    case circle
-    case square
+    case CIRCLE
+    case SQUARE
 }
 
 enum GenerationMode: Int{
-    case new_GAME
-    case regen_TILES
-    case shuffle_TILES
+    case NEW_GAME
+    case REGEN_TILES
+    case SHUFFLE_TILES
 }
 
 let defaultRegenTime = 60

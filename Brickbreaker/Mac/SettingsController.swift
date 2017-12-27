@@ -124,7 +124,7 @@ class SettingsController: NSViewController {
 			"ColorChangeTime" : colorChangeTime.integerValue,
 			"IsTimed" : !endlessModeEnabled,
 			"TimeLimit" : timeLimit.integerValue,
-			"TileShape" : TileShape(rawValue: tileShapeSelection.indexOfSelectedItem) ?? .circle,
+			"TileShape" : TileShape(rawValue: tileShapeSelection.indexOfSelectedItem) ?? .CIRCLE,
 			"ArcadeModeEnabled" : enableArcadeMode.state == NSControl.StateValue.on,
 			"ImageBGEnabled" : backgroundStyle.selectedCell() == imageBGMode,
 			"BGImage" : bgImage.image ?? "",
