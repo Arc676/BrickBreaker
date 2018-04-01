@@ -19,10 +19,12 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //See README and LICENSE for more details
 
+import Foundation
+
 let defaultRegenTime = 60
 let defaultRegenClearings = 10
 let defaultColorChangeTime = 60
 let defaultTimeLimit = 10
 
-let newGameKey = "com.arc676.startNewGame"
-let saveScoreKey = "com.arc676.saveScore"
+let newGameKey = NSNotification.Name("com.arc676.startNewGame")
+let saveScoreKey = NSNotification.Name("com.arc676.saveScore")

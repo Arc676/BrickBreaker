@@ -30,10 +30,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func newGame(_ sender: AnyObject) {
-		(NSApp.mainWindow?.contentView as! GameView).startGame()
+		NotificationCenter.default.post(name: newGameKey, object: nil)
     }
 
 	@IBAction func saveScore(_ sender: Any) {
+		NotificationCenter.default.post(name: saveScoreKey, object: nil)
 	}
 
 }

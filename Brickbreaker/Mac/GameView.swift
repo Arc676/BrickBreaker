@@ -82,6 +82,15 @@ class GameView: NSView {
         powerups = [[PowerUp]](repeating: [PowerUp](repeating: .NO_POWERUP, count: HEIGHT), count: WIDTH)
 
         super.init(coder: coder)
+
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(startGame),
+											   name: newGameKey,
+											   object: nil)
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(saveScore),
+											   name: saveScoreKey,
+											   object: nil)
     }
 
     override func draw(_ rect: NSRect) {
@@ -407,7 +416,7 @@ class GameView: NSView {
 		generateTiles(.SHUFFLE_TILES)
 	}
 
-	func startGame() {
+	@objc func startGame() {
 		if let settings = SettingsController.getSettings() {
 			colors = [
 				settings["Color1"] as! NSColor,
@@ -507,5 +516,7 @@ class GameView: NSView {
 		self.window?.title = "Brickbreaker Score:0 Selection:0"
 		needsDisplay = true
 	}
+
+	@objc func saveScore() {}
 	
 }
