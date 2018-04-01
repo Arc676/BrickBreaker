@@ -20,6 +20,8 @@
 		71536DC61F6162F7001087A5 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71536DC41F616268001087A5 /* SettingsController.swift */; };
 		71536DCA1F61644D001087A5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71536DC91F61644D001087A5 /* Credits.rtf */; };
 		718FFAE520707CA900326ECB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 718FFAE420707CA900326ECB /* Default-568h@2x.png */; };
+		718FFAE72070E49D00326ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FFAE62070E49D00326ECB /* Constants.swift */; };
+		718FFAE82070E4E600326ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FFAE62070E49D00326ECB /* Constants.swift */; };
 		71D1891E1DFEDCC400A92E45 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D1891D1DFEDCC400A92E45 /* GameView.swift */; };
 		71FA3FF21F5F8EBB00EC1917 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA3FF01F5F8EB600EC1917 /* AppDelegate.swift */; };
 		71FC89921DFEA409002A990A /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141CAFB1DFAA9060088C410 /* Enum.swift */; };
@@ -99,6 +101,7 @@
 		718F52B41ADFD95C0026AAE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		718F52B51ADFD95C0026AAE4 /* BrickbreakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickbreakerTests.m; sourceTree = "<group>"; };
 		718FFAE420707CA900326ECB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		718FFAE62070E49D00326ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Brickbreaker/Universal/Constants.swift; sourceTree = "<group>"; };
 		71D1891A1DFEDC4100A92E45 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71D1891D1DFEDCC400A92E45 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameView.swift; path = Brickbreaker/Mac/GameView.swift; sourceTree = SOURCE_ROOT; };
 		71D56A321C2E538F00D7FAA3 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 			children = (
 				7141CAFB1DFAA9060088C410 /* Enum.swift */,
 				71FF39FC1F61550500EEC082 /* Assets.xcassets */,
+				718FFAE62070E49D00326ECB /* Constants.swift */,
 			);
 			name = Universal;
 			sourceTree = "<group>";
@@ -474,6 +478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718FFAE72070E49D00326ECB /* Constants.swift in Sources */,
 				714AC3631C2E449D000D65E6 /* ViewController.swift in Sources */,
 				7141CAFE1DFAC3C50088C410 /* Enum.swift in Sources */,
 				714FABF81F67F5EE00DD7015 /* GameView.swift in Sources */,
@@ -501,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718FFAE82070E4E600326ECB /* Constants.swift in Sources */,
 				71536DC61F6162F7001087A5 /* SettingsController.swift in Sources */,
 				71FA3FF21F5F8EBB00EC1917 /* AppDelegate.swift in Sources */,
 				71D1891E1DFEDCC400A92E45 /* GameView.swift in Sources */,

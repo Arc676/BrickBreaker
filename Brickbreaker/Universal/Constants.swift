@@ -19,32 +19,10 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //See README and LICENSE for more details
 
-enum ColorIndex: Int{
-    case GREEN
-    case RED
-    case BLUE
-    case YELLOW
-    case N_A
-}
+let defaultRegenTime = 60
+let defaultRegenClearings = 10
+let defaultColorChangeTime = 60
+let defaultTimeLimit = 10
 
-enum PowerUp: Int{
-    case NO_POWERUP
-    case BOMB
-    case PLUS_50
-    case PLUS_200
-    case PLUS_2K
-    case PLUS_5K
-    case CLEAR_ROW
-    case CLEAR_COLUMN
-}
-
-enum TileShape: Int{
-    case CIRCLE
-    case SQUARE
-}
-
-enum GenerationMode: Int{
-    case NEW_GAME
-    case REGEN_TILES
-    case SHUFFLE_TILES
-}
+let newGameKey = "com.arc676.startNewGame"
+let saveScoreKey = "com.arc676.saveScore"
