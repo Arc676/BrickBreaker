@@ -19,6 +19,7 @@
 		714FABFA1F67F5F700DD7015 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714FABF91F67F5F700DD7015 /* Info.plist */; };
 		71536DC61F6162F7001087A5 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71536DC41F616268001087A5 /* SettingsController.swift */; };
 		71536DCA1F61644D001087A5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71536DC91F61644D001087A5 /* Credits.rtf */; };
+		718FFAE520707CA900326ECB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 718FFAE420707CA900326ECB /* Default-568h@2x.png */; };
 		71D1891E1DFEDCC400A92E45 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D1891D1DFEDCC400A92E45 /* GameView.swift */; };
 		71FA3FF21F5F8EBB00EC1917 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FA3FF01F5F8EB600EC1917 /* AppDelegate.swift */; };
 		71FC89921DFEA409002A990A /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141CAFB1DFAA9060088C410 /* Enum.swift */; };
@@ -97,6 +98,7 @@
 		71536DC91F61644D001087A5 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = Credits.rtf; path = Brickbreaker/Mac/Credits.rtf; sourceTree = SOURCE_ROOT; };
 		718F52B41ADFD95C0026AAE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		718F52B51ADFD95C0026AAE4 /* BrickbreakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickbreakerTests.m; sourceTree = "<group>"; };
+		718FFAE420707CA900326ECB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		71D1891A1DFEDC4100A92E45 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71D1891D1DFEDCC400A92E45 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameView.swift; path = Brickbreaker/Mac/GameView.swift; sourceTree = SOURCE_ROOT; };
 		71D56A321C2E538F00D7FAA3 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		714AC35F1C2E449D000D65E6 /* BrickBreaker iOS */ = {
 			isa = PBXGroup;
 			children = (
+				718FFAE420707CA900326ECB /* Default-568h@2x.png */,
 				714FABF91F67F5F700DD7015 /* Info.plist */,
 				714AC3601C2E449D000D65E6 /* AppDelegate.swift */,
 				714AC3621C2E449D000D65E6 /* ViewController.swift */,
@@ -417,6 +420,7 @@
 				71FF39FD1F61550500EEC082 /* Assets.xcassets in Resources */,
 				71FF3A051F61562C00EEC082 /* plus2k.png in Resources */,
 				71FF3A0B1F61562C00EEC082 /* plus200.png in Resources */,
+				718FFAE520707CA900326ECB /* Default-568h@2x.png in Resources */,
 				71FF3A0A1F61562C00EEC082 /* plus50.png in Resources */,
 				714AC3661C2E449D000D65E6 /* Main.storyboard in Resources */,
 				71FF3A071F61562C00EEC082 /* bomb.png in Resources */,
