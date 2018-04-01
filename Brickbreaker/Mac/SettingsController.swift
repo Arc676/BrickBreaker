@@ -101,6 +101,25 @@ class SettingsController: NSViewController {
 		}
 	}
 
+	@IBAction func createHiScoreFile(_ sender: Any) {
+		let panel = NSSavePanel()
+		panel.allowedFileTypes = ["txt", ""]
+		panel.canCreateDirectories = true
+		if panel.runModal() == NSApplication.ModalResponse.OK {
+			pathToFile.url = panel.url
+		}
+	}
+
+	@IBAction func openHiScoreFile(_ sender: Any) {
+		let panel = NSOpenPanel()
+		panel.canChooseDirectories = false
+		panel.allowsMultipleSelection = false
+		panel.allowedFileTypes = ["txt",""]
+		if panel.runModal() == NSApplication.ModalResponse.OK {
+			pathToFile.url = panel.url
+		}
+	}
+	
 	func getCurrentPath() -> URL {
 		return pathToFile.url!
 	}
