@@ -504,7 +504,7 @@ class GameView: NSView {
 		score = 0
 		gameOver = false
 		hasSelection = false
-//		[self.window setTitle:@"Brickbreaker Score:0 Selection:0"]
+		self.window?.title = "Brickbreaker Score:0 Selection:0"
 		needsDisplay = true
 	}
 	

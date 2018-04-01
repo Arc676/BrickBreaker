@@ -102,15 +102,6 @@ class SettingsController: NSViewController {
 	}
 
 	func getCurrentSettings() -> [String : Any] {
-		//unimplemened settings in getter:
-//		//music settings
-//		@IBOutlet weak var pathToMusic: NSPathControl!
-//		@IBOutlet weak var loopMusic: NSButton!
-//		var music: NSSound?
-//		//interface settings
-//		@IBOutlet weak var quitOnClose: NSButton!
-//		//high scores
-//		@IBOutlet weak var pathToFile: NSPathControl!
 		return [
 			"Color1" : tileColor1.color,
 			"Color2" : tileColor2.color,
@@ -128,8 +119,12 @@ class SettingsController: NSViewController {
 			"ArcadeModeEnabled" : enableArcadeMode.state == NSControl.StateValue.on,
 			"ImageBGEnabled" : backgroundStyle.selectedCell() == imageBGMode,
 			"BGImage" : bgImage.image ?? "",
-			"BGColor" : bgColor.color
-		]
+			"BGColor" : bgColor.color,
+			"Music" : music ?? "",
+			"LoopMusic" : loopMusic.state == NSControl.StateValue.on,
+			"QuitOnClose" : quitOnClose.state == NSControl.StateValue.on,
+			"PathToHiScores" : pathToFile.url!
+ 		]
 	}
 
 	static func getSettings() -> [String : Any]? {
