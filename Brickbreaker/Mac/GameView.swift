@@ -517,6 +517,48 @@ class GameView: NSView {
 		needsDisplay = true
 	}
 
-	@objc func saveScore() {}
+	@objc func saveScore() {
+		let url = SettingsController.getPath()
+		if (url.hasDirectoryPath) {
+			let alert = NSAlert()
+			alert.messageText = "Not a file"
+			alert.informativeText = "No hi score file selected in settings"
+			alert.runModal()
+			return;
+		}
+		var classic = true;
+		var str: NSMutableString = ""
+		do {
+			str = try NSMutableString(contentsOf: url, encoding: String.Encoding.utf8.rawValue)
+		} catch {}
+		str.append("\n\(score)")
+		if (timeRegen) {
+			str.append(" (Timed regeneration)")
+			classic = false;
+		}
+		if (clearingsRegen) {
+			str.append(" (Clearings regeneration)")
+			classic = false;
+		}
+		if (randomColorChange) {
+			str.append(" (Random color change)")
+		}
+		if (arcadeModeEnabled) {
+			str.append(" (Arcade mode)")
+		}
+		if (isTimed) {
+			str.append(" (Timed game: \(timeLimit) minutes)")
+		} else if (!classic) {
+			str.append(" (Endless mode)")
+		}
+		do {
+			try str.write(to: url, atomically: true, encoding: String.Encoding.utf8.rawValue)
+		} catch {
+			let alert = NSAlert()
+			alert.messageText = "Write failed"
+			alert.informativeText = "Failed to save to hi scores file"
+			alert.runModal()
+		}
+	}
 	
 }

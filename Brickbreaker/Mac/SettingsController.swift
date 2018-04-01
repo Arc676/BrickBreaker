@@ -101,6 +101,10 @@ class SettingsController: NSViewController {
 		}
 	}
 
+	func getCurrentPath() -> URL {
+		return pathToFile.url!
+	}
+
 	func getCurrentSettings() -> [String : Any] {
 		return [
 			"Color1" : tileColor1.color,
@@ -122,9 +126,12 @@ class SettingsController: NSViewController {
 			"BGColor" : bgColor.color,
 			"Music" : music ?? "",
 			"LoopMusic" : loopMusic.state == NSControl.StateValue.on,
-			"QuitOnClose" : quitOnClose.state == NSControl.StateValue.on,
-			"PathToHiScores" : pathToFile.url!
+			"QuitOnClose" : quitOnClose.state == NSControl.StateValue.on
  		]
+	}
+
+	static func getPath() -> URL {
+		return instance!.getCurrentPath();
 	}
 
 	static func getSettings() -> [String : Any]? {
