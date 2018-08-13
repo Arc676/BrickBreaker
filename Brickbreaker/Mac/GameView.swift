@@ -177,14 +177,12 @@ class GameView: NSView {
             needsDisplay = true
             return
         }
-		selectBricks(theEvent.locationInWindow.x, theEvent.locationInWindow.y)
+		selectBricks(Int(theEvent.locationInWindow.x / 20), Int(theEvent.locationInWindow.y / 20))
     }
 
-	func selectBricks(_ x: CGFloat, _ y: CGFloat) {
+	func selectBricks(_ x: Int, _ y: Int) {
 		hasSelection = false
 		points.removeAll()
-		let x = Int(x / 20)
-		let y = Int(y / 20)
 
 		if x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT || bricks[x][y] == .N_A {
 			needsDisplay = true
@@ -346,7 +344,25 @@ class GameView: NSView {
 			popUpTextTimer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(GameView.hidePopUpText(_:)), userInfo: nil, repeats: false)
 		}
 
+		if isGameOver() {
+			endGame()
+		}
+
 		needsDisplay = true
+	}
+
+	func isGameOver() -> Bool {
+		for y in 0..<HEIGHT {
+			for x in 0..<WIDTH {
+				selectBricks(x, y)
+				if hasSelection {
+					hasSelection = false
+					points.removeAll()
+					return false
+				}
+			}
+		}
+		return true
 	}
 
     override func keyUp(with theEvent: NSEvent) {
