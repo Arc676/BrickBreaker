@@ -19,6 +19,7 @@
 		714FABFA1F67F5F700DD7015 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714FABF91F67F5F700DD7015 /* Info.plist */; };
 		71536DC61F6162F7001087A5 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71536DC41F616268001087A5 /* SettingsController.swift */; };
 		71536DCA1F61644D001087A5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71536DC91F61644D001087A5 /* Credits.rtf */; };
+		716DA27721218F030053342F /* ScoreViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716DA27621218F030053342F /* ScoreViewer.swift */; };
 		718FFAE520707CA900326ECB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 718FFAE420707CA900326ECB /* Default-568h@2x.png */; };
 		718FFAE72070E49D00326ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FFAE62070E49D00326ECB /* Constants.swift */; };
 		718FFAE82070E4E600326ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FFAE62070E49D00326ECB /* Constants.swift */; };
@@ -98,6 +99,7 @@
 		714FABF91F67F5F700DD7015 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71536DC41F616268001087A5 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsController.swift; path = Brickbreaker/Mac/SettingsController.swift; sourceTree = SOURCE_ROOT; };
 		71536DC91F61644D001087A5 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = Credits.rtf; path = Brickbreaker/Mac/Credits.rtf; sourceTree = SOURCE_ROOT; };
+		716DA27621218F030053342F /* ScoreViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewer.swift; sourceTree = "<group>"; };
 		718F52B41ADFD95C0026AAE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		718F52B51ADFD95C0026AAE4 /* BrickbreakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickbreakerTests.m; sourceTree = "<group>"; };
 		718FFAE420707CA900326ECB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				714C34B41F61593B00EA8CB2 /* MainMac.storyboard */,
 				71536DC41F616268001087A5 /* SettingsController.swift */,
 				71536DC91F61644D001087A5 /* Credits.rtf */,
+				716DA27621218F030053342F /* ScoreViewer.swift */,
 			);
 			name = "BrickBreaker Mac";
 			path = Brickbreaker/Mac;
@@ -369,7 +372,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Arc676;
 				TargetAttributes = {
 					714AC35D1C2E449D000D65E6 = {
@@ -506,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				716DA27721218F030053342F /* ScoreViewer.swift in Sources */,
 				718FFAE82070E4E600326ECB /* Constants.swift in Sources */,
 				71536DC61F6162F7001087A5 /* SettingsController.swift in Sources */,
 				71FA3FF21F5F8EBB00EC1917 /* AppDelegate.swift in Sources */,
@@ -668,12 +672,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -720,12 +726,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -763,7 +771,7 @@
 				DEVELOPMENT_TEAM = T42F23M422;
 				INFOPLIST_FILE = "$(SRCROOT)/Brickbreaker/Mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Arc676.BrickBreaker-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -783,7 +791,7 @@
 				DEVELOPMENT_TEAM = T42F23M422;
 				INFOPLIST_FILE = "$(SRCROOT)/Brickbreaker/Mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Arc676.BrickBreaker-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

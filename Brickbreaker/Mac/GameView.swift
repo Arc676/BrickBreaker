@@ -534,10 +534,6 @@ class GameView: NSView {
 	}
 
 	@objc func saveScore() {
-		var existing: [Date : [String : Any]] = [:]
-		if let existingData = UserDefaults.standard.object(forKey: "Scores") as? Data {
-			existing = NSKeyedUnarchiver.unarchiveObject(with: existingData) as! [Date : [String : Any]]
-		}
 		let gameData: [String : Any] = [
 			"Score" : score,
 			"Timed regen" : timeRegen,
@@ -546,8 +542,7 @@ class GameView: NSView {
 			"Arcade mode" : arcadeModeEnabled,
 			"Time limit" : isTimed ? timeLimit : "Endless"
 			]
-		existing[Date()] = gameData
-		UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: existing), forKey: "Scores")
+		ScoreViewer.addScore(gameData)
 	}
 	
 }
