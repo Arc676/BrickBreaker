@@ -534,47 +534,20 @@ class GameView: NSView {
 	}
 
 	@objc func saveScore() {
-		let url = SettingsController.getPath()
-		if (url.hasDirectoryPath) {
-			let alert = NSAlert()
-			alert.messageText = "Not a file"
-			alert.informativeText = "No hi score file selected in settings"
-			alert.runModal()
-			return;
+		var existing: [Date : [String : Any]] = [:]
+		if let existingData = UserDefaults.standard.object(forKey: "Scores") as? Data {
+			existing = NSKeyedUnarchiver.unarchiveObject(with: existingData) as! [Date : [String : Any]]
 		}
-		var classic = true;
-		var str: NSMutableString = ""
-		do {
-			str = try NSMutableString(contentsOf: url, encoding: String.Encoding.utf8.rawValue)
-		} catch {}
-		str.append("\n\(score)")
-		if (timeRegen) {
-			str.append(" (Timed regeneration)")
-			classic = false;
-		}
-		if (clearingsRegen) {
-			str.append(" (Clearings regeneration)")
-			classic = false;
-		}
-		if (randomColorChange) {
-			str.append(" (Random color change)")
-		}
-		if (arcadeModeEnabled) {
-			str.append(" (Arcade mode)")
-		}
-		if (isTimed) {
-			str.append(" (Timed game: \(timeLimit) minutes)")
-		} else if (!classic) {
-			str.append(" (Endless mode)")
-		}
-		do {
-			try str.write(to: url, atomically: true, encoding: String.Encoding.utf8.rawValue)
-		} catch {
-			let alert = NSAlert()
-			alert.messageText = "Write failed"
-			alert.informativeText = "Failed to save to hi scores file"
-			alert.runModal()
-		}
+		let gameData: [String : Any] = [
+			"Score" : score,
+			"Timed regen" : timeRegen,
+			"Clearings regen" : clearingsRegen,
+			"Color change" : randomColorChange,
+			"Arcade mode" : arcadeModeEnabled,
+			"Time limit" : isTimed ? timeLimit : "Endless"
+			]
+		existing[Date()] = gameData
+		UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: existing), forKey: "Scores")
 	}
 	
 }

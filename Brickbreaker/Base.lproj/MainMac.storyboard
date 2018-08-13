@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="UXQ-Cy-jA7">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="UXQ-Cy-jA7">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -598,11 +598,11 @@
             <objects>
                 <viewController id="2NS-mk-hye" customClass="SettingsController" customModule="BrickBreaker_Mac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="wxE-yu-NNT">
-                        <rect key="frame" x="0.0" y="0.0" width="522" height="597"/>
+                        <rect key="frame" x="0.0" y="0.0" width="522" height="429"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" title="Game Mode" translatesAutoresizingMaskIntoConstraints="NO" id="WfN-zF-fcy">
-                                <rect key="frame" x="17" y="414" width="488" height="163"/>
+                                <rect key="frame" x="17" y="246" width="488" height="163"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="tYH-R9-cVm">
                                     <rect key="frame" x="1" y="1" width="486" height="147"/>
@@ -722,118 +722,6 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                        </button>
-                                    </subviews>
-                                </view>
-                            </box>
-                            <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" title="Background Music" translatesAutoresizingMaskIntoConstraints="NO" id="fj8-E9-6Zp">
-                                <rect key="frame" x="17" y="312" width="483" height="98"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" id="pU8-tR-cex">
-                                    <rect key="frame" x="1" y="1" width="481" height="82"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="04A-tf-pbc">
-                                            <rect key="frame" x="12" y="7" width="145" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Open Music File" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="960-f7-V03">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="chooseMusic:" target="2NS-mk-hye" id="smQ-fo-sYt"/>
-                                            </connections>
-                                        </button>
-                                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eB4-DN-onf">
-                                            <rect key="frame" x="18" y="50" width="445" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="SaI-Wp-9MW">
-                                                <font key="font" metaFont="system"/>
-                                                <url key="url" string="file://localhost/Applications/"/>
-                                                <color key="backgroundColor" red="0.89803921568627454" green="0.92549019607843142" blue="0.97254901960784312" alpha="1" colorSpace="deviceRGB"/>
-                                            </pathCell>
-                                        </pathControl>
-                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fKx-IX-cdO">
-                                            <rect key="frame" x="160" y="15" width="63" height="18"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Loop" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="A75-9t-H8E">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fG0-Td-E26">
-                                            <rect key="frame" x="224" y="7" width="80" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JvF-GN-dEg">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="musicButton:" target="2NS-mk-hye" id="okI-CV-dON"/>
-                                            </connections>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hWH-4K-jLW">
-                                            <rect key="frame" x="304" y="7" width="84" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Pause" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8rm-iF-MKG">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="musicButton:" target="2NS-mk-hye" id="iiZ-IG-kek"/>
-                                            </connections>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h3g-Ng-GmJ">
-                                            <rect key="frame" x="384" y="7" width="85" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Restart" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F3G-8J-5Yf">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="musicButton:" target="2NS-mk-hye" id="etU-lW-Cgd"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </view>
-                            </box>
-                            <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" title="Save High Scores To:" translatesAutoresizingMaskIntoConstraints="NO" id="5PI-RV-oEV">
-                                <rect key="frame" x="17" y="246" width="483" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" id="F2E-kq-ekq">
-                                    <rect key="frame" x="1" y="1" width="481" height="46"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HSL-9I-O1G">
-                                            <rect key="frame" x="18" y="14" width="300" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="N1a-Mc-O0n">
-                                                <font key="font" metaFont="system"/>
-                                                <url key="url" string="file:///Applications/"/>
-                                                <color key="backgroundColor" red="0.89803921568627454" green="0.92549019607843142" blue="0.97254901960784312" alpha="1" colorSpace="deviceRGB"/>
-                                            </pathCell>
-                                        </pathControl>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gXg-Qr-WMq">
-                                            <rect key="frame" x="381" y="8" width="88" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Change" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Nf9-55-Fqn">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="openHiScoreFile:" target="2NS-mk-hye" id="r7S-o6-T02"/>
-                                            </connections>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="asN-HH-Vet">
-                                            <rect key="frame" x="321" y="8" width="68" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="New" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lmh-fs-qS9">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="createHiScoreFile:" target="2NS-mk-hye" id="GJQ-cW-IZs"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
@@ -988,9 +876,6 @@
                         <outlet property="enableRandomColorChange" destination="YVD-FL-17c" id="OqA-ip-9Qp"/>
                         <outlet property="enableTimeRegen" destination="CDQ-OJ-HvA" id="Goq-Q4-Wbx"/>
                         <outlet property="imageBGMode" destination="MSO-nq-cIr" id="FN4-tx-fte"/>
-                        <outlet property="loopMusic" destination="fKx-IX-cdO" id="5Th-ad-uCp"/>
-                        <outlet property="pathToFile" destination="HSL-9I-O1G" id="5ml-EV-gQU"/>
-                        <outlet property="pathToMusic" destination="eB4-DN-onf" id="F93-d9-imz"/>
                         <outlet property="quitOnClose" destination="yI6-mo-TE3" id="cDB-Sg-fTT"/>
                         <outlet property="tileColor1" destination="uCU-PZ-eZb" id="fpK-ne-6Ae"/>
                         <outlet property="tileColor2" destination="qkd-FN-JzQ" id="BH8-E7-DZr"/>
@@ -1003,7 +888,7 @@
                 </viewController>
                 <customObject id="t6d-sc-Meg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="830" y="91"/>
+            <point key="canvasLocation" x="746" y="162"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="a2K-mY-2as">

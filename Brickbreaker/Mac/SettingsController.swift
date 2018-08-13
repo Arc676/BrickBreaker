@@ -54,14 +54,9 @@ class SettingsController: NSViewController {
 	@IBOutlet weak var imageBGMode: NSButtonCell!
 	@IBOutlet weak var bgColor: NSColorWell!
 	@IBOutlet weak var bgImage: NSImageView!
-	//music settings
-	@IBOutlet weak var pathToMusic: NSPathControl!
-	@IBOutlet weak var loopMusic: NSButton!
 	var music: NSSound?
 	//interface settings
 	@IBOutlet weak var quitOnClose: NSButton!
-	//high scores
-	@IBOutlet weak var pathToFile: NSPathControl!
 
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
@@ -71,57 +66,6 @@ class SettingsController: NSViewController {
 	@IBAction func toggleEndless(_ sender: AnyObject) {
 		endlessModeEnabled = (sender.state == NSControl.StateValue.on)
 		timeLimit.isEnabled = !endlessModeEnabled
-	}
-
-	@IBAction func chooseMusic(_ sender: AnyObject) {
-		let panel = NSOpenPanel()
-		panel.allowedFileTypes = ["aiff","mp3","m4a","wav"]
-		panel.allowsMultipleSelection = false
-		if panel.runModal().rawValue == NSFileHandlingPanelOKButton {
-			pathToMusic.url = panel.url!
-			music = NSSound(contentsOf: panel.url!, byReference: true)
-			music!.loops = (loopMusic.state == NSControl.StateValue.on)
-		}
-	}
-
-	func playMusic() {
-		if music?.play() ?? false {
-			music?.resume()
-		}
-	}
-
-	@IBAction func musicButton(_ sender: NSButton) {
-		if sender.title == "Play" {
-			playMusic()
-		} else if sender.title == "Pause" {
-			music?.pause()
-		} else {
-			music?.currentTime = 0
-			playMusic()
-		}
-	}
-
-	@IBAction func createHiScoreFile(_ sender: Any) {
-		let panel = NSSavePanel()
-		panel.allowedFileTypes = ["txt", ""]
-		panel.canCreateDirectories = true
-		if panel.runModal() == NSApplication.ModalResponse.OK {
-			pathToFile.url = panel.url
-		}
-	}
-
-	@IBAction func openHiScoreFile(_ sender: Any) {
-		let panel = NSOpenPanel()
-		panel.canChooseDirectories = false
-		panel.allowsMultipleSelection = false
-		panel.allowedFileTypes = ["txt",""]
-		if panel.runModal() == NSApplication.ModalResponse.OK {
-			pathToFile.url = panel.url
-		}
-	}
-	
-	func getCurrentPath() -> URL {
-		return pathToFile.url!
 	}
 
 	func getCurrentSettings() -> [String : Any] {
@@ -143,14 +87,8 @@ class SettingsController: NSViewController {
 			"ImageBGEnabled" : backgroundStyle.selectedCell() == imageBGMode,
 			"BGImage" : bgImage.image ?? "",
 			"BGColor" : bgColor.color,
-			"Music" : music ?? "",
-			"LoopMusic" : loopMusic.state == NSControl.StateValue.on,
 			"QuitOnClose" : quitOnClose.state == NSControl.StateValue.on
  		]
-	}
-
-	static func getPath() -> URL {
-		return instance!.getCurrentPath();
 	}
 
 	static func getSettings() -> [String : Any]? {
