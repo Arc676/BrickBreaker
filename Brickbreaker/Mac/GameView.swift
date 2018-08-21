@@ -24,6 +24,7 @@ import Cocoa
 class GameView: NSView {
 
     let WIDTH = 22, HEIGHT = 28
+	var lastCol = 21 // WIDTH - 1
 
     var points: [String]
     var regenTimer, gameTimer, colorChangeTimer, popUpTextTimer: Timer!
@@ -297,6 +298,8 @@ class GameView: NSView {
 		}
 
 		points.removeAll()
+
+		// fall vertically
 		for _ in 0...(high + added - low + 1) {
 			for x in left...right {
 				for y in max(1, low)..<HEIGHT {
@@ -312,6 +315,31 @@ class GameView: NSView {
 						}
 					}
 				}
+			}
+		}
+
+		// fall horizontally
+		var x = left
+		while x < WIDTH {
+			var colIsEmpty = true
+			for y in 0..<HEIGHT {
+				if bricks[x][y] != .N_A {
+					colIsEmpty = false
+					break
+				}
+			}
+			if colIsEmpty && x < lastCol {
+				for x1 in x..<WIDTH - 1 {
+					bricks[x1] = bricks[x1 + 1]
+				}
+				if bricks[lastCol][0] != .N_A {
+					for y1 in 0..<HEIGHT {
+						bricks[lastCol][y1] = .N_A
+					}
+				}
+				lastCol -= 1
+			} else {
+				x += 1
 			}
 		}
 
@@ -360,6 +388,8 @@ class GameView: NSView {
 		}
 		return true
 	}
+
+	override func keyDown(with event: NSEvent) {}
 
     override func keyUp(with theEvent: NSEvent) {
 		clearBricks()
@@ -512,6 +542,7 @@ class GameView: NSView {
 				repeats: true)
 		}
 		generateTiles(.NEW_GAME)
+		lastCol = WIDTH - 1
 		powerups = [[PowerUp]](repeating: [PowerUp](repeating: .NO_POWERUP, count: HEIGHT), count: WIDTH)
 		consecutive5s = 0
 		if arcadeModeEnabled {
