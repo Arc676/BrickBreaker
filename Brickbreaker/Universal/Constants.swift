@@ -27,4 +27,3 @@ let defaultColorChangeTime = 60
 let defaultTimeLimit = 10
 
 let newGameKey = NSNotification.Name("com.arc676.startNewGame")
-let saveScoreKey = NSNotification.Name("com.arc676.saveScore")

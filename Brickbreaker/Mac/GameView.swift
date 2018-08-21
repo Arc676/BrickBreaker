@@ -87,10 +87,6 @@ class GameView: NSView {
 											   selector: #selector(startGame),
 											   name: newGameKey,
 											   object: nil)
-		NotificationCenter.default.addObserver(self,
-											   selector: #selector(saveScore),
-											   name: saveScoreKey,
-											   object: nil)
     }
 
     override func draw(_ rect: NSRect) {
@@ -372,6 +368,7 @@ class GameView: NSView {
     @objc func endGame() {
         gameOver = true
         needsDisplay = true
+		saveScore()
     }
 
     @objc func hidePopUpText(_ timer: Timer) {
@@ -533,7 +530,7 @@ class GameView: NSView {
 		needsDisplay = true
 	}
 
-	@objc func saveScore() {
+	func saveScore() {
 		let gameData: [String : Any] = [
 			"Score" : score,
 			"Timed regen" : timeRegen,

@@ -70,13 +70,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Hf2-03-GnR"/>
-                                        <menuItem title="Save Score" keyEquivalent="s" id="5N1-Vh-LFc">
-                                            <connections>
-                                                <action selector="saveScore:" target="Voe-Tx-rLC" id="xBl-ym-NTm"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="View Scores" id="6nN-TR-kaY">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="View Scores" keyEquivalent="S" id="6nN-TR-kaY">
                                             <connections>
                                                 <segue destination="Ggt-p0-pFx" kind="show" id="dV1-lF-XWK"/>
                                             </connections>
@@ -454,7 +448,7 @@
                                 <rect key="frame" x="20" y="94" width="210" height="264"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="nmi-zm-In0">
-                                    <rect key="frame" x="1" y="23" width="208" height="240"/>
+                                    <rect key="frame" x="1" y="0.0" width="208" height="263"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="LQe-IB-Koz" id="MJb-Cf-mjx">
@@ -486,11 +480,11 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="WmM-kg-QZQ">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <rect key="frame" x="-7" y="8" width="0.0" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="s7Q-2S-Kmo">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <rect key="frame" x="-14" y="15" width="15" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="LQe-IB-Koz">
@@ -524,7 +518,7 @@
                                 <rect key="frame" x="250" y="94" width="210" height="264"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="9Wm-JZ-HGs">
-                                    <rect key="frame" x="1" y="23" width="208" height="240"/>
+                                    <rect key="frame" x="1" y="0.0" width="208" height="263"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="I67-At-2Uw" id="QnZ-F6-AlN">
@@ -569,11 +563,11 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="TPA-X2-tYJ">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <rect key="frame" x="-7" y="8" width="0.0" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="FSp-DS-YsM">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <rect key="frame" x="-14" y="15" width="15" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="I67-At-2Uw">
