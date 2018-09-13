@@ -43,6 +43,11 @@ class GameView: NSView {
     var bricks: [[ColorIndex]]
     var powerups: [[PowerUp]]
 
+	let att: [NSAttributedStringKey : Any] = [
+		NSAttributedStringKey.font : NSFont(name: "Helvetica", size: 30)!,
+		NSAttributedStringKey.foregroundColor : NSColor.white
+	]
+
     required init?(coder: NSCoder) {
         hasSelection = false
         gameOver = true
@@ -99,13 +104,16 @@ class GameView: NSView {
             rect.fill()
         }
 
+		// draw bricks
         for x in 0..<WIDTH {
             for y in 0..<HEIGHT {
+				// ignore empty spaces
                 if bricks[x][y] == .N_A {
                     continue
                 }
-                colors[bricks[x][y].rawValue].set()
 
+				// draw current brick
+				colors[bricks[x][y].rawValue].set()
                 let xcoord: CGFloat = CGFloat(x * 20)
                 let ycoord: CGFloat = CGFloat(y * 20)
                 if shape == .CIRCLE {
@@ -116,6 +124,7 @@ class GameView: NSView {
                     NSMakeRect(xcoord, ycoord, 20, 20).fill()
                 }
 
+				// draw powerups, if present
                 if arcadeModeEnabled && powerups[x][y] != .NO_POWERUP {
                     let point = NSMakePoint(xcoord, ycoord)
                     switch powerups[x][y] {
@@ -138,6 +147,7 @@ class GameView: NSView {
                     }
                 }
 
+				// highlight the player's selection, if present
                 if hasSelection {
                     for point in points {
                         NSColor.white.set()
@@ -146,12 +156,8 @@ class GameView: NSView {
                     }
                 }
 
+				// draw text, if needed
                 NSColor.black.set()
-                let att: [NSAttributedStringKey : Any] = [
-                    NSAttributedStringKey.font : NSFont(name: "Helvetica", size: 30)!,
-                    NSAttributedStringKey.foregroundColor : NSColor.white
-                ]
-
                 if popUpTextPresent {
                     let str = NSAttributedString(string:
 						String(popUpText[popUpText.index(popUpText.startIndex, offsetBy: 1)...]),
@@ -159,7 +165,6 @@ class GameView: NSView {
                     NSMakeRect(0, 540 - str.size().height, 440, str.size().height + 10).fill()
                     str.draw(at: NSMakePoint(440/2 - str.size().width/2, 550 - str.size().height))
                 }
-
                 if gameOver {
                     NSMakeRect(0, 250, 440, 50).fill()
                     let str = NSAttributedString(string: "Game Over", attributes: att)
@@ -177,10 +182,19 @@ class GameView: NSView {
 		selectBricks(Int(theEvent.locationInWindow.x / 20), Int(theEvent.locationInWindow.y / 20))
     }
 
+	/**
+	Selects adjacent bricks of the same color
+
+	- parameters:
+		- x: Horizontal index of clicked brick
+		- y: Vertical index of clicked brick
+	*/
 	func selectBricks(_ x: Int, _ y: Int) {
+		// clear current selection
 		hasSelection = false
 		points.removeAll()
 
+		// do nothing if the index is out of bounds
 		if x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT || bricks[x][y] == .N_A {
 			needsDisplay = true
 			window?.title = "BrickBreaker Score: \(score) Selection: 0"
@@ -188,6 +202,7 @@ class GameView: NSView {
 		}
 
 		findAdjacentTo(x, y, bricks[x][y])
+		// selection must exceed 1 brick, then update window title
 		if points.count == 1 {
 			points.removeAll()
 			window?.title = "BrickBreaker Score: \(score) Selection: 0"
@@ -199,11 +214,16 @@ class GameView: NSView {
 		needsDisplay = true
 	}
 
+	/**
+	Clear the selected bricks
+	*/
 	func clearBricks() {
+		// do nothing if nothing is selected
 		if points.count == 0 {
 			return
 		}
 
+		// track consecutive clearings of 5+ bricks
 		if points.count > 5 {
 			consecutive5s += 1
 		} else {
@@ -212,14 +232,18 @@ class GameView: NSView {
 
 		var shouldShowPopUp = false
 
+		// check if a combo has been reached
 		if consecutive5s > 0 && consecutive5s % 5 == 0 {
 			popUpText += "\nCombo (\(consecutive5s))! +\(consecutive5s * 100)"
 			score += UInt(consecutive5s * 100)
 			shouldShowPopUp = true
 		}
 
+		// get points from clearing selection
 		score += UInt(pow(Double(points.count - 1), 4))
 
+		// determine the area of the grid that needs updating by finding
+		// the extremities of the affected space
 		var low = HEIGHT, high = -1, left = WIDTH, right = -1, added = 0
 		for str in points {
 			let point = NSPointFromString(str)
@@ -239,11 +263,14 @@ class GameView: NSView {
 				right = xcoord
 			}
 
+			// clear the brick
 			bricks[xcoord][ycoord] = .N_A
+			// check for powerups
 			if arcadeModeEnabled {
 				var cleared = 0
 				switch powerups[xcoord][ycoord] {
 				case .BOMB:
+					// clear the surrounding blocks
 					for x in (xcoord - 2)...(xcoord + 2) {
 						if x < 0 || x >= WIDTH {
 							continue
@@ -258,6 +285,7 @@ class GameView: NSView {
 							}
 						}
 					}
+					// update affected region
 					added += 4
 					low = max(0, low - 2)
 					left = max(0, left - 2)
@@ -271,32 +299,40 @@ class GameView: NSView {
 				case .PLUS_5K:
 					score += 5000
 				case .CLEAR_ROW:
+					// clear the entire row
 					for x in 0..<WIDTH {
 						if bricks[x][ycoord] != .N_A {
 							bricks[x][ycoord] = .N_A
 							cleared += 1
 						}
 					}
+					// update affected region
 					added += 1
 					low = max(0, low - 1)
 					left = 0
 					right = WIDTH - 1
 				case .CLEAR_COLUMN:
+					// clear entire column
 					for y in 0..<HEIGHT {
 						if bricks[xcoord][y] != .N_A {
 							bricks[xcoord][y] = .N_A
 							cleared += 1
 						}
 					}
+					// update affected region
 					low = 0
 				default:
 					break
 				}
+				// obtain score from additional cleared bricks
+				// and clear powerup
 				score += UInt(pow(Double(cleared), 4))
 				powerups[xcoord][ycoord] = .NO_POWERUP
 			}
 		}
 
+		// clear selection
+		hasSelection = false
 		points.removeAll()
 
 		// fall vertically
@@ -343,6 +379,7 @@ class GameView: NSView {
 			}
 		}
 
+		// random criticals
 		if arc4random_uniform(100) < 7 {
 			popUpText += "\nCritical! +500 pts"
 			score += 500
@@ -351,6 +388,7 @@ class GameView: NSView {
 
 		window?.title = "BrickBreaker Score: \(score) Selection: 0"
 
+		// check if tiles should regenerate
 		if clearingsRegen {
 			clearings += 1
 			if clearings >= clearingsLimit {
@@ -359,6 +397,7 @@ class GameView: NSView {
 			}
 		}
 
+		// show text, if present
 		if shouldShowPopUp {
 			popUpTextPresent = true
 			if (popUpTextTimer != nil) {
@@ -368,6 +407,7 @@ class GameView: NSView {
 			popUpTextTimer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(GameView.hidePopUpText(_:)), userInfo: nil, repeats: false)
 		}
 
+		// check if there are any more available bricks to pop
 		if isGameOver() {
 			endGame()
 		}
@@ -375,6 +415,12 @@ class GameView: NSView {
 		needsDisplay = true
 	}
 
+	/**
+	Determines if the game is over
+
+	- returns:
+	If there are no more possible brick selections
+	*/
 	func isGameOver() -> Bool {
 		for y in 0..<HEIGHT {
 			for x in 0..<WIDTH {
@@ -395,18 +441,37 @@ class GameView: NSView {
 		clearBricks()
     }
 
+	/**
+	Terminates the game
+	*/
     @objc func endGame() {
+		clearTimers()
         gameOver = true
         needsDisplay = true
 		saveScore()
     }
 
+	/**
+	Hides the popup text after the specified delay
+
+	- parameters:
+		- timer: Timer object
+	*/
     @objc func hidePopUpText(_ timer: Timer) {
         popUpTextPresent = false
         popUpText = ""
         needsDisplay = true
     }
 
+	/**
+	Recursively search for bricks that share a color with the selected brick and
+	are all adjacent to each other
+
+	- parameters:
+		- x: Horizontal index of original brick
+		- y: Vertical index of original brick
+		- color: Color of original brick
+	*/
 	func findAdjacentTo(_ x: Int, _ y: Int, _ color: ColorIndex) {
 		points.append("\(x) \(y)")
 		if y < HEIGHT - 1 {
@@ -435,10 +500,20 @@ class GameView: NSView {
 		}
 	}
 
+	/**
+	Generates bricks
+
+	- parameters:
+		- mode: Desired brick generation algorithm
+	*/
 	func generateTiles(_ mode: GenerationMode) {
 		for x in 0..<WIDTH {
 			for y in 0..<HEIGHT {
 				let val = ColorIndex(rawValue: Int(arc4random_uniform(4)))!
+				// the brick at the given position should become a new random brick if
+				// - a new game is being started
+				// - bricks are being regenerated and there is currently no brick at this position
+				// - bricks are being shuffled and there currently is a brick at this position
 				if (mode == .NEW_GAME) ||
 					(mode == .REGEN_TILES && bricks[x][y] == .N_A) ||
 					(mode == .SHUFFLE_TILES && bricks[x][y] != .N_A) {
@@ -451,14 +526,23 @@ class GameView: NSView {
 		needsDisplay = true
 	}
 
+	/**
+	Regenerates the grid
+	*/
 	@objc func addTiles() {
 		generateTiles(.REGEN_TILES)
 	}
 
+	/**
+	Randomizes the colors of the bricks on the grid
+	*/
 	@objc func shuffleTiles() {
 		generateTiles(.SHUFFLE_TILES)
 	}
 
+	/**
+	Invalidates all timers
+	*/
 	func clearTimers() {
 		if regenTimer != nil {
 			regenTimer.invalidate()
@@ -474,7 +558,11 @@ class GameView: NSView {
 		}
 	}
 
+	/**
+	Starts a new game
+	*/
 	@objc func startGame() {
+		// obtain game settings
 		if let settings = SettingsController.getSettings() {
 			colors = [
 				settings["Color1"] as! NSColor,
@@ -505,6 +593,7 @@ class GameView: NSView {
 			}
 		}
 
+		// initialize time sensitive game properties
 		if clearingsLimit <= 0 {
 			clearingsLimit = defaultRegenClearings
 		}
@@ -542,6 +631,7 @@ class GameView: NSView {
 				userInfo: nil,
 				repeats: true)
 		}
+		// generate grid and powerups, if enabled
 		generateTiles(.NEW_GAME)
 		lastCol = WIDTH - 1
 		powerups = [[PowerUp]](repeating: [PowerUp](repeating: .NO_POWERUP, count: HEIGHT), count: WIDTH)
@@ -549,8 +639,9 @@ class GameView: NSView {
 		if arcadeModeEnabled {
 				for _ in 0..<15  {
 					if arc4random_uniform(100) < 60 {
-						powerups[Int(arc4random_uniform(UInt32(WIDTH)))][Int(arc4random_uniform(UInt32(HEIGHT)))] =
-							PowerUp(rawValue: Int(arc4random_uniform(7)) + 1)!
+						let x = Int(arc4random_uniform(UInt32(WIDTH)))
+						let y = Int(arc4random_uniform(UInt32(HEIGHT)))
+						powerups[x][y] = PowerUp(rawValue: Int(arc4random_uniform(7)) + 1)!
 					}
 				}
 		}
@@ -558,10 +649,13 @@ class GameView: NSView {
 		score = 0
 		gameOver = false
 		hasSelection = false
-		self.window?.title = "Brickbreaker Score:0 Selection:0"
+		self.window?.title = "Brickbreaker Score: 0 Selection: 0"
 		needsDisplay = true
 	}
 
+	/**
+	Save score to disk
+	*/
 	func saveScore() {
 		let gameData: [String : Any] = [
 			"Score" : score,

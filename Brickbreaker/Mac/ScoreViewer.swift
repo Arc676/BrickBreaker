@@ -42,6 +42,9 @@ class ScoreViewer: NSViewController, NSTableViewDelegate, NSTableViewDataSource 
 	var confirmAlert: NSAlert?
 	var entries: [Date]?
 
+	/**
+	Obtain existing scores from disk, if present
+	*/
 	class func initializeScores() {
 		ScoreViewer.scores = [:]
 		if let existingData = UserDefaults.standard.object(forKey: "Scores") as? Data {
@@ -49,12 +52,21 @@ class ScoreViewer: NSViewController, NSTableViewDelegate, NSTableViewDataSource 
 		}
 	}
 
+	/**
+	Adds a new score to the list
+
+	- parameters:
+		- data: Game data
+	*/
 	class func addScore(_ data: [String : Any]) {
 		ScoreViewer.scores![Date()] = data
 		ScoreViewer.saveScoresToDisk()
 		instance?.refreshScoreData()
 	}
 
+	/**
+	Writes player scores to disk
+	*/
 	class func saveScoresToDisk() {
 		UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: ScoreViewer.scores!), forKey: "Scores")
 	}
@@ -76,6 +88,9 @@ class ScoreViewer: NSViewController, NSTableViewDelegate, NSTableViewDataSource 
 		refreshScoreData()
 	}
 
+	/**
+	Refreshes the interface to show updated score set
+	*/
 	func refreshScoreData() {
 		entries = Array(ScoreViewer.scores!.keys)
 		entries?.sort { $1.compare($0) == .orderedDescending }
@@ -113,6 +128,12 @@ class ScoreViewer: NSViewController, NSTableViewDelegate, NSTableViewDataSource 
 		}
 	}
 
+	/**
+	Deletes the selected score data from the list
+
+	- parameters:
+		- sender: Button clicked
+	*/
 	@IBAction func deleteSelected(_ sender: Any) {
 		let row = gameTable.selectedRow
 		if row != -1 && confirmAlert?.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
@@ -122,6 +143,12 @@ class ScoreViewer: NSViewController, NSTableViewDelegate, NSTableViewDataSource 
 		}
 	}
 
+	/**
+	Deletes all score data from the list
+
+	- parameters:
+		- sender: Button clicked
+	*/
 	@IBAction func deleteAll(_ sender: Any) {
 		if confirmAlert?.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
 			ScoreViewer.scores?.removeAll()

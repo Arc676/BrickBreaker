@@ -63,11 +63,23 @@ class SettingsController: NSViewController {
 		SettingsController.instance = self
 	}
 
+	/**
+	Toggles whether the game should have a time limit
+
+	- parameters:
+		- sender: Button clicked
+	*/
 	@IBAction func toggleEndless(_ sender: AnyObject) {
 		endlessModeEnabled = (sender.state == NSControl.StateValue.on)
 		timeLimit.isEnabled = !endlessModeEnabled
 	}
 
+	/**
+	Obtain the current game settings
+
+	- returns:
+	Dictionary containing all the current game settings
+	*/
 	func getCurrentSettings() -> [String : Any] {
 		return [
 			"Color1" : tileColor1.color,
@@ -91,6 +103,12 @@ class SettingsController: NSViewController {
  		]
 	}
 
+	/**
+	Class function to obtain the current game settings
+
+	- returns:
+	Dictionary containing all the current game settings
+	*/
 	static func getSettings() -> [String : Any]? {
 		return instance?.getCurrentSettings()
 	}
