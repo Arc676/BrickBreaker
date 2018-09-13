@@ -459,6 +459,21 @@ class GameView: NSView {
 		generateTiles(.SHUFFLE_TILES)
 	}
 
+	func clearTimers() {
+		if regenTimer != nil {
+			regenTimer.invalidate()
+			regenTimer = nil
+		}
+		if gameTimer != nil {
+			gameTimer.invalidate()
+			gameTimer = nil
+		}
+		if colorChangeTimer != nil {
+			colorChangeTimer.invalidate()
+			colorChangeTimer = nil
+		}
+	}
+
 	@objc func startGame() {
 		if let settings = SettingsController.getSettings() {
 			colors = [
@@ -502,6 +517,7 @@ class GameView: NSView {
 		if randomColorChangeTime <= 0 {
 			randomColorChangeTime = defaultColorChangeTime
 		}
+		clearTimers()
 		if timeRegen {
 			regenTimer = Timer.scheduledTimer(
 				timeInterval: TimeInterval(regenTime),
@@ -509,11 +525,6 @@ class GameView: NSView {
 				selector: #selector(addTiles),
 				userInfo: nil,
 				repeats: true)
-		} else {
-			if regenTimer != nil {
-				regenTimer.invalidate()
-				regenTimer = nil
-			}
 		}
 		if isTimed {
 			gameTimer = Timer.scheduledTimer(
@@ -522,16 +533,6 @@ class GameView: NSView {
 				selector: #selector(endGame),
 				userInfo: nil,
 				repeats: false)
-		} else {
-			if gameTimer != nil {
-				gameTimer.invalidate()
-				gameTimer = nil
-			}
-		}
-
-		if colorChangeTimer != nil {
-			colorChangeTimer.invalidate()
-			colorChangeTimer = nil
 		}
 		if randomColorChange {
 			colorChangeTimer = Timer.scheduledTimer(
@@ -568,7 +569,7 @@ class GameView: NSView {
 			"Clearings regen" : clearingsRegen,
 			"Color change" : randomColorChange,
 			"Arcade mode" : arcadeModeEnabled,
-			"Time limit" : isTimed ? timeLimit : "Endless"
+			"Time limit" : isTimed ? timeLimit : "None"
 			]
 		ScoreViewer.addScore(gameData)
 	}
