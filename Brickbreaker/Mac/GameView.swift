@@ -23,164 +23,164 @@ import Cocoa
 
 class GameView: NSView {
 
-    let WIDTH = 22, HEIGHT = 28
+	let WIDTH = 22, HEIGHT = 28
 	var lastCol = 21 // WIDTH - 1
 
-    var points: [String]
-    var regenTimer, gameTimer, colorChangeTimer, popUpTextTimer: Timer!
-    var colors: [NSColor]
-    var bgImage, bomb, plus50, plus200, plus2k, plus5k, clearRow, clearColumn: NSImage!
-    var bgColor: NSColor! = NSColor.black
-    var popUpText: String
+	var points: [String]
+	var regenTimer, gameTimer, colorChangeTimer, popUpTextTimer: Timer!
+	var colors: [NSColor]
+	var bgImage, bomb, plus50, plus200, plus2k, plus5k, clearRow, clearColumn: NSImage!
+	var bgColor: NSColor! = NSColor.black
+	var popUpText: String
 
-    var hasSelection, gameOver, isTimed, isImageBG, arcadeModeEnabled, popUpTextPresent: Bool
-    var timeRegen, clearingsRegen, randomColorChange: Bool
-    var score: UInt
-    var clearings, clearingsLimit, regenTime, randomColorChangeTime, consecutive5s: Int
-    var timeLimit: Int
-    var shape: TileShape
+	var hasSelection, gameOver, isTimed, isImageBG, arcadeModeEnabled, popUpTextPresent: Bool
+	var timeRegen, clearingsRegen, randomColorChange: Bool
+	var score: UInt
+	var clearings, clearingsLimit, regenTime, randomColorChangeTime, consecutive5s: Int
+	var timeLimit: Int
+	var shape: TileShape
 
-    var bricks: [[ColorIndex]]
-    var powerups: [[PowerUp]]
+	var bricks: [[ColorIndex]]
+	var powerups: [[PowerUp]]
 
 	let att: [NSAttributedStringKey : Any] = [
 		NSAttributedStringKey.font : NSFont(name: "Helvetica", size: 30)!,
 		NSAttributedStringKey.foregroundColor : NSColor.white
 	]
 
-    required init?(coder: NSCoder) {
-        hasSelection = false
-        gameOver = true
-        isTimed = false
-        isImageBG = false
-        arcadeModeEnabled = false
-        popUpTextPresent = false
-        timeRegen = false
-        clearingsRegen = false
-        randomColorChange = false
+	required init?(coder: NSCoder) {
+		hasSelection = false
+		gameOver = true
+		isTimed = false
+		isImageBG = false
+		arcadeModeEnabled = false
+		popUpTextPresent = false
+		timeRegen = false
+		clearingsRegen = false
+		randomColorChange = false
 
-        score = 0
+		score = 0
 
-        clearings = 0
-        clearingsLimit = 0
-        regenTime = 0
-        randomColorChangeTime = 0
-        consecutive5s = 0
+		clearings = 0
+		clearingsLimit = 0
+		regenTime = 0
+		randomColorChangeTime = 0
+		consecutive5s = 0
 
-        timeLimit = 0
+		timeLimit = 0
 
-        points = []
-        colors = [NSColor.red, NSColor.green, NSColor.blue, NSColor.yellow]
+		points = []
+		colors = [NSColor.red, NSColor.green, NSColor.blue, NSColor.yellow]
 
-        popUpText = ""
+		popUpText = ""
 
-        shape = .CIRCLE
+		shape = .CIRCLE
 
-        bomb = NSImage(named: NSImage.Name(rawValue: "bomb.png"))
-        plus50 = NSImage(named: NSImage.Name(rawValue: "plus50.png"))
-        plus200 = NSImage(named: NSImage.Name(rawValue: "plus200.png"))
-        plus2k = NSImage(named: NSImage.Name(rawValue: "plus2k.png"))
-        plus5k = NSImage(named: NSImage.Name(rawValue: "plus5k.png"))
-        clearRow = NSImage(named: NSImage.Name(rawValue: "clearRow.png"))
-        clearColumn = NSImage(named: NSImage.Name(rawValue: "clearColumn.png"))
+		bomb = NSImage(named: NSImage.Name(rawValue: "bomb.png"))
+		plus50 = NSImage(named: NSImage.Name(rawValue: "plus50.png"))
+		plus200 = NSImage(named: NSImage.Name(rawValue: "plus200.png"))
+		plus2k = NSImage(named: NSImage.Name(rawValue: "plus2k.png"))
+		plus5k = NSImage(named: NSImage.Name(rawValue: "plus5k.png"))
+		clearRow = NSImage(named: NSImage.Name(rawValue: "clearRow.png"))
+		clearColumn = NSImage(named: NSImage.Name(rawValue: "clearColumn.png"))
 
-        bricks = [[ColorIndex]](repeating: [ColorIndex](repeating: .N_A, count: HEIGHT), count: WIDTH)
-        powerups = [[PowerUp]](repeating: [PowerUp](repeating: .NO_POWERUP, count: HEIGHT), count: WIDTH)
+		bricks = [[ColorIndex]](repeating: [ColorIndex](repeating: .N_A, count: HEIGHT), count: WIDTH)
+		powerups = [[PowerUp]](repeating: [PowerUp](repeating: .NO_POWERUP, count: HEIGHT), count: WIDTH)
 
-        super.init(coder: coder)
+		super.init(coder: coder)
 
 		NotificationCenter.default.addObserver(self,
 											   selector: #selector(startGame),
 											   name: newGameKey,
 											   object: nil)
-    }
+	}
 
-    override func draw(_ rect: NSRect) {
-        super.draw(rect)
-        if isImageBG {
-            bgImage.draw(at: NSZeroPoint, from: NSZeroRect, operation: .sourceOver, fraction: 1)
-        } else {
-            bgColor.set()
-            rect.fill()
-        }
+	override func draw(_ rect: NSRect) {
+		super.draw(rect)
+		if isImageBG {
+			bgImage.draw(at: NSZeroPoint, from: NSZeroRect, operation: .sourceOver, fraction: 1)
+		} else {
+			bgColor.set()
+			rect.fill()
+		}
 
 		// draw bricks
-        for x in 0..<WIDTH {
-            for y in 0..<HEIGHT {
+		for x in 0..<WIDTH {
+			for y in 0..<HEIGHT {
 				// ignore empty spaces
-                if bricks[x][y] == .N_A {
-                    continue
-                }
+				if bricks[x][y] == .N_A {
+					continue
+				}
 
 				// draw current brick
 				colors[bricks[x][y].rawValue].set()
-                let xcoord: CGFloat = CGFloat(x * 20)
-                let ycoord: CGFloat = CGFloat(y * 20)
-                if shape == .CIRCLE {
-                    let path = NSBezierPath()
-                    path.appendOval(in: NSMakeRect(xcoord, ycoord, 20, 20))
-                    path.fill()
-                } else {
-                    NSMakeRect(xcoord, ycoord, 20, 20).fill()
-                }
+				let xcoord: CGFloat = CGFloat(x * 20)
+				let ycoord: CGFloat = CGFloat(y * 20)
+				if shape == .CIRCLE {
+					let path = NSBezierPath()
+					path.appendOval(in: NSMakeRect(xcoord, ycoord, 20, 20))
+					path.fill()
+				} else {
+					NSMakeRect(xcoord, ycoord, 20, 20).fill()
+				}
 
 				// draw powerups, if present
-                if arcadeModeEnabled && powerups[x][y] != .NO_POWERUP {
-                    let point = NSMakePoint(xcoord, ycoord)
-                    switch powerups[x][y] {
-                    case .BOMB:
-                        bomb.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
-                    case .PLUS_50:
-                        plus50.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
-                    case .PLUS_200:
-                        plus200.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
-                    case .PLUS_2K:
-                        plus2k.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
-                    case .PLUS_5K:
-                        plus5k.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
-                    case .CLEAR_ROW:
-                        clearRow.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
-                    case .CLEAR_COLUMN:
-                        clearColumn.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
-                    default:
-                        break
-                    }
-                }
+				if arcadeModeEnabled && powerups[x][y] != .NO_POWERUP {
+					let point = NSMakePoint(xcoord, ycoord)
+					switch powerups[x][y] {
+					case .BOMB:
+						bomb.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
+					case .PLUS_50:
+						plus50.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
+					case .PLUS_200:
+						plus200.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
+					case .PLUS_2K:
+						plus2k.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
+					case .PLUS_5K:
+						plus5k.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
+					case .CLEAR_ROW:
+						clearRow.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
+					case .CLEAR_COLUMN:
+						clearColumn.draw(at: point, from: NSZeroRect, operation: .sourceOver, fraction: 1)
+					default:
+						break
+					}
+				}
 
 				// highlight the player's selection, if present
-                if hasSelection {
-                    for point in points {
-                        NSColor.white.set()
-                        let origin = NSPointFromString(point)
-                        NSMakeRect(origin.x * 20, origin.y * 20, 20, 20).frame()
-                    }
-                }
+				if hasSelection {
+					for point in points {
+						NSColor.white.set()
+						let origin = NSPointFromString(point)
+						NSMakeRect(origin.x * 20, origin.y * 20, 20, 20).frame()
+					}
+				}
 
 				// draw text, if needed
-                NSColor.black.set()
-                if popUpTextPresent {
-                    let str = NSAttributedString(string:
+				NSColor.black.set()
+				if popUpTextPresent {
+					let str = NSAttributedString(string:
 						String(popUpText[popUpText.index(popUpText.startIndex, offsetBy: 1)...]),
-						attributes: att)
-                    NSMakeRect(0, 540 - str.size().height, 440, str.size().height + 10).fill()
-                    str.draw(at: NSMakePoint(440/2 - str.size().width/2, 550 - str.size().height))
-                }
-                if gameOver {
-                    NSMakeRect(0, 250, 440, 50).fill()
-                    let str = NSAttributedString(string: "Game Over", attributes: att)
-                    str.draw(at: NSMakePoint(440/2 - str.size().width/2, 255))
-                }
-            }
-        }
-    }
+												 attributes: att)
+					NSMakeRect(0, 540 - str.size().height, 440, str.size().height + 10).fill()
+					str.draw(at: NSMakePoint(440/2 - str.size().width/2, 550 - str.size().height))
+				}
+				if gameOver {
+					NSMakeRect(0, 250, 440, 50).fill()
+					let str = NSAttributedString(string: "Game Over", attributes: att)
+					str.draw(at: NSMakePoint(440/2 - str.size().width/2, 255))
+				}
+			}
+		}
+	}
 
-    override func mouseUp(with theEvent: NSEvent) {
-        if gameOver {
-            needsDisplay = true
-            return
-        }
+	override func mouseUp(with theEvent: NSEvent) {
+		if gameOver {
+			needsDisplay = true
+			return
+		}
 		selectBricks(Int(theEvent.locationInWindow.x / 20), Int(theEvent.locationInWindow.y / 20))
-    }
+	}
 
 	/**
 	Selects adjacent bricks of the same color
@@ -188,8 +188,9 @@ class GameView: NSView {
 	- parameters:
 		- x: Horizontal index of clicked brick
 		- y: Vertical index of clicked brick
+		- byUser: Whether the call was made because the user clicked (defaults to true)
 	*/
-	func selectBricks(_ x: Int, _ y: Int) {
+	func selectBricks(_ x: Int, _ y: Int, _ byUser: Bool = true) {
 		// clear current selection
 		hasSelection = false
 		points.removeAll()
@@ -203,12 +204,16 @@ class GameView: NSView {
 
 		findAdjacentTo(x, y, bricks[x][y])
 		// selection must exceed 1 brick, then update window title
-		if points.count == 1 {
+		if points.count <= 1 {
 			points.removeAll()
-			window?.title = "BrickBreaker Score: \(score) Selection: 0"
+			if byUser {
+				window?.title = "BrickBreaker Score: \(score) Selection: 0"
+			}
 		} else {
 			hasSelection = true
-			window?.title = "BrickBreaker Score: \(score) Selection: \(pow(Float(points.count - 1), 4))"
+			if byUser {
+				window?.title = "BrickBreaker Score: \(score) Selection: \(pow(Float(points.count - 1), 4))"
+			}
 		}
 
 		needsDisplay = true
@@ -424,10 +429,9 @@ class GameView: NSView {
 	func isGameOver() -> Bool {
 		for y in 0..<HEIGHT {
 			for x in 0..<WIDTH {
-				selectBricks(x, y)
+				selectBricks(x, y, false)
 				if hasSelection {
 					hasSelection = false
-					points.removeAll()
 					return false
 				}
 			}
@@ -437,19 +441,19 @@ class GameView: NSView {
 
 	override func keyDown(with event: NSEvent) {}
 
-    override func keyUp(with theEvent: NSEvent) {
+	override func keyUp(with theEvent: NSEvent) {
 		clearBricks()
-    }
+	}
 
 	/**
 	Terminates the game
 	*/
-    @objc func endGame() {
+	@objc func endGame() {
 		clearTimers()
-        gameOver = true
-        needsDisplay = true
+		gameOver = true
+		needsDisplay = true
 		saveScore()
-    }
+	}
 
 	/**
 	Hides the popup text after the specified delay
@@ -457,11 +461,11 @@ class GameView: NSView {
 	- parameters:
 		- timer: Timer object
 	*/
-    @objc func hidePopUpText(_ timer: Timer) {
-        popUpTextPresent = false
-        popUpText = ""
-        needsDisplay = true
-    }
+	@objc func hidePopUpText(_ timer: Timer) {
+		popUpTextPresent = false
+		popUpText = ""
+		needsDisplay = true
+	}
 
 	/**
 	Recursively search for bricks that share a color with the selected brick and
@@ -587,9 +591,9 @@ class GameView: NSView {
 
 			isImageBG = settings["ImageBGEnabled"] as! Bool
 			if isImageBG {
-				bgImage = settings["BGImage"] as! NSImage
+				bgImage = settings["BGImage"] as? NSImage
 			} else {
-				bgColor = settings["BGColor"] as! NSColor
+				bgColor = settings["BGColor"] as? NSColor
 			}
 		}
 
@@ -637,13 +641,13 @@ class GameView: NSView {
 		powerups = [[PowerUp]](repeating: [PowerUp](repeating: .NO_POWERUP, count: HEIGHT), count: WIDTH)
 		consecutive5s = 0
 		if arcadeModeEnabled {
-				for _ in 0..<15  {
-					if arc4random_uniform(100) < 60 {
-						let x = Int(arc4random_uniform(UInt32(WIDTH)))
-						let y = Int(arc4random_uniform(UInt32(HEIGHT)))
-						powerups[x][y] = PowerUp(rawValue: Int(arc4random_uniform(7)) + 1)!
-					}
+			for _ in 0..<15  {
+				if arc4random_uniform(100) < 60 {
+					let x = Int(arc4random_uniform(UInt32(WIDTH)))
+					let y = Int(arc4random_uniform(UInt32(HEIGHT)))
+					powerups[x][y] = PowerUp(rawValue: Int(arc4random_uniform(7)) + 1)!
 				}
+			}
 		}
 		points.removeAll()
 		score = 0
@@ -664,7 +668,7 @@ class GameView: NSView {
 			"Color change" : randomColorChange,
 			"Arcade mode" : arcadeModeEnabled,
 			"Time limit" : isTimed ? timeLimit : "None"
-			]
+		]
 		ScoreViewer.addScore(gameData)
 	}
 	

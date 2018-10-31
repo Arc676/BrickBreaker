@@ -12,8 +12,6 @@
 		714AC3631C2E449D000D65E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714AC3621C2E449D000D65E6 /* ViewController.swift */; };
 		714AC3661C2E449D000D65E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714AC3641C2E449D000D65E6 /* Main.storyboard */; };
 		714AC36B1C2E449D000D65E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714AC3691C2E449D000D65E6 /* LaunchScreen.storyboard */; };
-		714AC3761C2E449D000D65E6 /* BrickBreakerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714AC3751C2E449D000D65E6 /* BrickBreakerTests.swift */; };
-		714AC3811C2E449D000D65E6 /* BrickBreakerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714AC3801C2E449D000D65E6 /* BrickBreakerUITests.swift */; };
 		714C34B61F61593B00EA8CB2 /* MainMac.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714C34B41F61593B00EA8CB2 /* MainMac.storyboard */; };
 		714FABF81F67F5EE00DD7015 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D56A321C2E538F00D7FAA3 /* GameView.swift */; };
 		714FABFA1F67F5F700DD7015 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714FABF91F67F5F700DD7015 /* Info.plist */; };
@@ -50,23 +48,6 @@
 		71FF3A121F61562D00EEC082 /* plus200.png in Resources */ = {isa = PBXBuildFile; fileRef = 714A99AE1AF7670100402602 /* plus200.png */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		714AC3721C2E449D000D65E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 718F52941ADFD95C0026AAE4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 714AC35D1C2E449D000D65E6;
-			remoteInfo = BrickBreaker;
-		};
-		714AC37D1C2E449D000D65E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 718F52941ADFD95C0026AAE4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 714AC35D1C2E449D000D65E6;
-			remoteInfo = BrickBreaker;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		712CA9BB1AF8576E00277C3B /* ss1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ss1.jpg; path = Imgs/ss1.jpg; sourceTree = "<group>"; };
 		712CA9BC1AF8576E00277C3B /* ss2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ss2.jpg; path = Imgs/ss2.jpg; sourceTree = "<group>"; };
@@ -89,19 +70,11 @@
 		714AC3621C2E449D000D65E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		714AC3651C2E449D000D65E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		714AC36A1C2E449D000D65E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		714AC3711C2E449D000D65E6 /* BrickBreakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrickBreakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		714AC3751C2E449D000D65E6 /* BrickBreakerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickBreakerTests.swift; sourceTree = "<group>"; };
-		714AC3771C2E449D000D65E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		714AC37C1C2E449D000D65E6 /* BrickBreakerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrickBreakerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		714AC3801C2E449D000D65E6 /* BrickBreakerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickBreakerUITests.swift; sourceTree = "<group>"; };
-		714AC3821C2E449D000D65E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		714C34B51F61593B00EA8CB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Brickbreaker/Base.lproj/MainMac.storyboard; sourceTree = SOURCE_ROOT; };
 		714FABF91F67F5F700DD7015 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71536DC41F616268001087A5 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsController.swift; path = Brickbreaker/Mac/SettingsController.swift; sourceTree = SOURCE_ROOT; };
 		71536DC91F61644D001087A5 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = Credits.rtf; path = Brickbreaker/Mac/Credits.rtf; sourceTree = SOURCE_ROOT; };
 		716DA27621218F030053342F /* ScoreViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewer.swift; sourceTree = "<group>"; };
-		718F52B41ADFD95C0026AAE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		718F52B51ADFD95C0026AAE4 /* BrickbreakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickbreakerTests.m; sourceTree = "<group>"; };
 		718FFAE420707CA900326ECB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		718FFAE62070E49D00326ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Brickbreaker/Universal/Constants.swift; sourceTree = "<group>"; };
 		71D1891A1DFEDC4100A92E45 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,20 +87,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		714AC35B1C2E449D000D65E6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		714AC36E1C2E449D000D65E6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		714AC3791C2E449D000D65E6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -205,25 +164,6 @@
 			path = Brickbreaker/iOS;
 			sourceTree = "<group>";
 		};
-		714AC3741C2E449D000D65E6 /* BrickBreakerTests iOS */ = {
-			isa = PBXGroup;
-			children = (
-				714AC3751C2E449D000D65E6 /* BrickBreakerTests.swift */,
-				714AC3771C2E449D000D65E6 /* Info.plist */,
-			);
-			name = "BrickBreakerTests iOS";
-			path = BrickBreakerTests;
-			sourceTree = "<group>";
-		};
-		714AC37F1C2E449D000D65E6 /* BrickBreakerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				714AC3801C2E449D000D65E6 /* BrickBreakerUITests.swift */,
-				714AC3821C2E449D000D65E6 /* Info.plist */,
-			);
-			path = BrickBreakerUITests;
-			sourceTree = "<group>";
-		};
 		718F52931ADFD95C0026AAE4 = {
 			isa = PBXGroup;
 			children = (
@@ -231,9 +171,6 @@
 				71D806251AE356D300C4C278 /* Imgs */,
 				7141CAFA1DFAA8C90088C410 /* Universal */,
 				714AC35F1C2E449D000D65E6 /* BrickBreaker iOS */,
-				714AC3741C2E449D000D65E6 /* BrickBreakerTests iOS */,
-				714AC37F1C2E449D000D65E6 /* BrickBreakerUITests */,
-				718F52B21ADFD95C0026AAE4 /* BrickbreakerTests */,
 				71FC89861DFE97C7002A990A /* BrickBreaker Mac */,
 				718F529D1ADFD95C0026AAE4 /* Products */,
 			);
@@ -243,28 +180,9 @@
 			isa = PBXGroup;
 			children = (
 				714AC35E1C2E449D000D65E6 /* BrickBreaker iOS.app */,
-				714AC3711C2E449D000D65E6 /* BrickBreakerTests.xctest */,
-				714AC37C1C2E449D000D65E6 /* BrickBreakerUITests.xctest */,
 				71FC89851DFE97C7002A990A /* BrickBreaker Mac.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		718F52B21ADFD95C0026AAE4 /* BrickbreakerTests */ = {
-			isa = PBXGroup;
-			children = (
-				718F52B51ADFD95C0026AAE4 /* BrickbreakerTests.m */,
-				718F52B31ADFD95C0026AAE4 /* Supporting Files */,
-			);
-			path = BrickbreakerTests;
-			sourceTree = "<group>";
-		};
-		718F52B31ADFD95C0026AAE4 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				718F52B41ADFD95C0026AAE4 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		71D806251AE356D300C4C278 /* Imgs */ = {
@@ -312,42 +230,6 @@
 			productReference = 714AC35E1C2E449D000D65E6 /* BrickBreaker iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		714AC3701C2E449D000D65E6 /* BrickBreakerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 714AC3861C2E449D000D65E6 /* Build configuration list for PBXNativeTarget "BrickBreakerTests" */;
-			buildPhases = (
-				714AC36D1C2E449D000D65E6 /* Sources */,
-				714AC36E1C2E449D000D65E6 /* Frameworks */,
-				714AC36F1C2E449D000D65E6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				714AC3731C2E449D000D65E6 /* PBXTargetDependency */,
-			);
-			name = BrickBreakerTests;
-			productName = BrickBreakerTests;
-			productReference = 714AC3711C2E449D000D65E6 /* BrickBreakerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		714AC37B1C2E449D000D65E6 /* BrickBreakerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 714AC3891C2E449D000D65E6 /* Build configuration list for PBXNativeTarget "BrickBreakerUITests" */;
-			buildPhases = (
-				714AC3781C2E449D000D65E6 /* Sources */,
-				714AC3791C2E449D000D65E6 /* Frameworks */,
-				714AC37A1C2E449D000D65E6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				714AC37E1C2E449D000D65E6 /* PBXTargetDependency */,
-			);
-			name = BrickBreakerUITests;
-			productName = BrickBreakerUITests;
-			productReference = 714AC37C1C2E449D000D65E6 /* BrickBreakerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		71FC89841DFE97C7002A990A /* BrickBreaker Mac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 71FC898F1DFE97C7002A990A /* Build configuration list for PBXNativeTarget "BrickBreaker Mac" */;
@@ -378,16 +260,6 @@
 					714AC35D1C2E449D000D65E6 = {
 						CreatedOnToolsVersion = 7.2;
 					};
-					714AC3701C2E449D000D65E6 = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = VMNQE63MQJ;
-						TestTargetID = 714AC35D1C2E449D000D65E6;
-					};
-					714AC37B1C2E449D000D65E6 = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = VMNQE63MQJ;
-						TestTargetID = 714AC35D1C2E449D000D65E6;
-					};
 					71FC89841DFE97C7002A990A = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = T42F23M422;
@@ -410,8 +282,6 @@
 			projectRoot = "";
 			targets = (
 				714AC35D1C2E449D000D65E6 /* BrickBreaker iOS */,
-				714AC3701C2E449D000D65E6 /* BrickBreakerTests */,
-				714AC37B1C2E449D000D65E6 /* BrickBreakerUITests */,
 				71FC89841DFE97C7002A990A /* BrickBreaker Mac */,
 			);
 		};
@@ -434,20 +304,6 @@
 				714FABFA1F67F5F700DD7015 /* Info.plist in Resources */,
 				71FF3A091F61562C00EEC082 /* clearRow.png in Resources */,
 				71FF3A081F61562C00EEC082 /* clearColumn.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		714AC36F1C2E449D000D65E6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		714AC37A1C2E449D000D65E6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,22 +345,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		714AC36D1C2E449D000D65E6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				714AC3761C2E449D000D65E6 /* BrickBreakerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		714AC3781C2E449D000D65E6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				714AC3811C2E449D000D65E6 /* BrickBreakerUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		71FC89811DFE97C7002A990A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -519,19 +359,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		714AC3731C2E449D000D65E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 714AC35D1C2E449D000D65E6 /* BrickBreaker iOS */;
-			targetProxy = 714AC3721C2E449D000D65E6 /* PBXContainerItemProxy */;
-		};
-		714AC37E1C2E449D000D65E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 714AC35D1C2E449D000D65E6 /* BrickBreaker iOS */;
-			targetProxy = 714AC37D1C2E449D000D65E6 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		714AC3641C2E449D000D65E6 /* Main.storyboard */ = {
@@ -592,70 +419,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		714AC3871C2E449D000D65E6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = BrickBreakerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Arc676.BrickBreakerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BrickBreaker.app/BrickBreaker";
-			};
-			name = Debug;
-		};
-		714AC3881C2E449D000D65E6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = BrickBreakerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Arc676.BrickBreakerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BrickBreaker.app/BrickBreaker";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		714AC38A1C2E449D000D65E6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = BrickBreakerUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Arc676.BrickBreakerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = BrickBreaker;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		714AC38B1C2E449D000D65E6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = BrickBreakerUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Arc676.BrickBreakerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = BrickBreaker;
-				USES_XCTRUNNER = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -808,24 +571,6 @@
 			buildConfigurations = (
 				714AC3841C2E449D000D65E6 /* Debug */,
 				714AC3851C2E449D000D65E6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		714AC3861C2E449D000D65E6 /* Build configuration list for PBXNativeTarget "BrickBreakerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				714AC3871C2E449D000D65E6 /* Debug */,
-				714AC3881C2E449D000D65E6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		714AC3891C2E449D000D65E6 /* Build configuration list for PBXNativeTarget "BrickBreakerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				714AC38A1C2E449D000D65E6 /* Debug */,
-				714AC38B1C2E449D000D65E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

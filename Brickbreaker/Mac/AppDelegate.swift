@@ -23,15 +23,15 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+	
+	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		ScoreViewer.initializeScores()
 		NSApp.mainWindow?.makeFirstResponder(NSApp.mainWindow?.contentView)
-        newGame(NSNull())
-    }
-
-    @IBAction func newGame(_ sender: AnyObject) {
+		newGame(NSNull())
+	}
+	
+	@IBAction func newGame(_ sender: AnyObject) {
 		NotificationCenter.default.post(name: newGameKey, object: nil)
-    }
-
+	}
+	
 }

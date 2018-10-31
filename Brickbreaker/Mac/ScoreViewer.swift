@@ -56,7 +56,7 @@ class ScoreViewer: NSViewController, NSTableViewDelegate, NSTableViewDataSource 
 	Adds a new score to the list
 
 	- parameters:
-		- data: Game data
+	- data: Game data
 	*/
 	class func addScore(_ data: [String : Any]) {
 		ScoreViewer.scores![Date()] = data
@@ -132,7 +132,7 @@ class ScoreViewer: NSViewController, NSTableViewDelegate, NSTableViewDataSource 
 	Deletes the selected score data from the list
 
 	- parameters:
-		- sender: Button clicked
+	- sender: Button clicked
 	*/
 	@IBAction func deleteSelected(_ sender: Any) {
 		let row = gameTable.selectedRow
@@ -147,7 +147,7 @@ class ScoreViewer: NSViewController, NSTableViewDelegate, NSTableViewDataSource 
 	Deletes all score data from the list
 
 	- parameters:
-		- sender: Button clicked
+	- sender: Button clicked
 	*/
 	@IBAction func deleteAll(_ sender: Any) {
 		if confirmAlert?.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {

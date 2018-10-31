@@ -67,7 +67,7 @@ class SettingsController: NSViewController {
 	Toggles whether the game should have a time limit
 
 	- parameters:
-		- sender: Button clicked
+	- sender: Button clicked
 	*/
 	@IBAction func toggleEndless(_ sender: AnyObject) {
 		endlessModeEnabled = (sender.state == NSControl.StateValue.on)
@@ -100,7 +100,7 @@ class SettingsController: NSViewController {
 			"BGImage" : bgImage.image ?? "",
 			"BGColor" : bgColor.color,
 			"QuitOnClose" : quitOnClose.state == NSControl.StateValue.on
- 		]
+		]
 	}
 
 	/**
